@@ -46,28 +46,33 @@ a {
   // background-color: yellow;
   flex-direction: column;
   justify-content: space-between;
+  // flex-wrap: wrap;
   & h1 {
     // background-color: red;
     margin: 2rem 0 0;
     text-align: center;
   }
-  &-input {
-    // background-color: green;
-    margin: 2rem 0;
-  }
-  &-menu {
-    // background-color: red;
+  &-controls {
     @extend %my-flex;
-    justify-content: space-between;
-    align-items: center;
-    &-item a {
+    flex-direction: column;
+    &-input {
       // background-color: green;
-      // margin: 5px 10px;
-      text-align: center;
-      padding: 5px 10px;
-      border: 1px solid black;
-      display: block;
-      min-width: 70px;
+      margin: 2rem 0;
+    }
+    &-menu {
+      // background-color: red;
+      @extend %my-flex;
+      justify-content: space-between;
+      align-items: center;
+      &-item a {
+        // background-color: green;
+        // margin: 5px 10px;
+        text-align: center;
+        padding: 5px 10px;
+        border: 1px solid black;
+        display: block;
+        min-width: 70px;
+      }
     }
   }
 }
