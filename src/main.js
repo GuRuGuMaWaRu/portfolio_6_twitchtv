@@ -7,9 +7,14 @@ import Stream from './components/streams/Stream';
 class Main extends React.Component {
   render() {
     return (
-      <div className="wrapper">
+      <div>
         <NavBar />
-        <div>
+        <div className="my-feature">
+          <div className="wrapper">
+            <Stream picture="FCC" name="FreeCodeCamp" status="Online" />
+          </div>
+        </div>
+        <div className="wrapper">
           <Stream picture="Warcraft" name="Warcraft" status="Offline" />
           <Stream picture="Starcraft" name="Starcraft" status="Online" />
           <Stream picture="Total War" name="Total War" status="Pending" />

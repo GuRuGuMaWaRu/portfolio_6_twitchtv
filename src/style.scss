@@ -11,6 +11,11 @@ li {
   list-style: none;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 /************************
  MAIN STYLE
 *************************/
@@ -19,6 +24,12 @@ li {
   width: 80%;
   max-width: 1000px;
   margin: 0 auto;
+}
+
+.my-feature {
+  background-color: darkgrey;
+  display: none;
+  width: 100%;
 }
 
 /************************
@@ -30,20 +41,27 @@ li {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  // align-items: center;
   & h1 {
     background-color: red;
+    margin: 2rem 0 0;
+    text-align: center;
+  }
+  &-input {
     margin: 2rem 0;
   }
   &-menu {
     background-color: red;
     display: flex;
-    justify-content: space-around;;
+    justify-content: space-around;
     &-item {
-      background-color: green;
-      margin: 0 10px;
-      padding: 5px 10px;
-
+      // vertical-align: middle;
+      // display: inline-block;
+      & a {
+        background-color: green;
+        margin: 5px 10px;
+        padding: 5px 10px;
+        display: block;
+      }
     }
   }
 }
@@ -53,6 +71,10 @@ li {
 *************************/
 
 @media (min-width: 769px) {
+  .my-feature {
+      display: block;
+  }
+
   .my-navbar {
     flex-direction: row;
     & h1 {
