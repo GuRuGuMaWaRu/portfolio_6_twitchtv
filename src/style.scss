@@ -16,6 +16,11 @@ a {
   color: black;
 }
 
+%my-flex {
+  display: flex;
+  display: -webkit-flex;
+}
+
 /************************
  MAIN STYLE
 *************************/
@@ -37,33 +42,38 @@ a {
 *************************/
 
 .my-navbar {
+  @extend %my-flex;
   background-color: yellow;
-  display: flex;
   flex-direction: column;
   justify-content: space-between;
   & h1 {
-    background-color: red;
+    // background-color: red;
     margin: 2rem 0 0;
     text-align: center;
   }
   &-input {
+    // background-color: green;
     margin: 2rem 0;
   }
   &-menu {
-    background-color: red;
-    display: flex;
+    // background-color: red;
+    @extend %my-flex;
     justify-content: space-around;
-    &-item {
-      // vertical-align: middle;
-      // display: inline-block;
-      & a {
-        background-color: green;
-        margin: 5px 10px;
-        padding: 5px 10px;
-        display: block;
-      }
+    &-item a {
+      // background-color: green;
+      margin: 5px 10px;
+      padding: 5px 10px;
+      display: block;
     }
   }
+}
+
+/************************
+ SORT BUTTONS
+*************************/
+
+.my-sort-buttons {
+  @extend %my-flex;
 }
 
 /************************
@@ -71,14 +81,19 @@ a {
 *************************/
 
 @media (min-width: 769px) {
+  // FEATURE BLOCK
   .my-feature {
       display: block;
   }
-
+  // NAV BLOCK
   .my-navbar {
     flex-direction: row;
     & h1 {
       margin: 0;
+    }
+    &-input {
+      margin: 0 1em;
+      flex-grow: 1;
     }
   }
 }
@@ -87,4 +102,9 @@ a {
   body {
     background-color: brown;
   }
+  // NAV BLOCK
+  .my-navbar-input {
+    margin: 0 4em;
+  }
+
 }
