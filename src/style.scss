@@ -1,0 +1,68 @@
+/************************
+ GENERAL STYLE
+*************************/
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+/************************
+ MAIN STYLE
+*************************/
+
+.wrapper {
+  width: 80%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/************************
+ NAVBAR STYLE
+*************************/
+
+.my-navbar {
+  background-color: yellow;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // align-items: center;
+  & h1 {
+    background-color: red;
+    margin: 2rem 0;
+  }
+  &-menu {
+    background-color: red;
+    display: flex;
+    justify-content: space-around;;
+    &-item {
+      background-color: green;
+      margin: 0 10px;
+      padding: 5px 10px;
+
+    }
+  }
+}
+
+/************************
+ MEDIA QUERIES
+*************************/
+
+@media (min-width: 769px) {
+  .my-navbar {
+    flex-direction: row;
+    & h1 {
+      margin: 0;
+    }
+  }
+}
+
+@media (min-width: 1025px) {
+  body {
+    background-color: brown;
+  }
+}

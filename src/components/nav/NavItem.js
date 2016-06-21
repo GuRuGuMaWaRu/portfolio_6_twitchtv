@@ -3,7 +3,7 @@ import React from 'react';
 class NavItem extends React.Component {
   render() {
     return (
-      <li>
+      <li className="my-navbar-menu-item">
         {this.props.label}
       </li>
     )
