@@ -43,7 +43,7 @@ a {
 
 .my-navbar {
   @extend %my-flex;
-  background-color: yellow;
+  // background-color: yellow;
   flex-direction: column;
   justify-content: space-between;
   & h1 {
@@ -58,12 +58,16 @@ a {
   &-menu {
     // background-color: red;
     @extend %my-flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: center;
     &-item a {
       // background-color: green;
-      margin: 5px 10px;
+      // margin: 5px 10px;
+      text-align: center;
       padding: 5px 10px;
+      border: 1px solid black;
       display: block;
+      min-width: 70px;
     }
   }
 }
@@ -74,6 +78,21 @@ a {
 
 .my-sort-buttons {
   @extend %my-flex;
+  // background-color: green;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0;
+  &-sort {
+    // background-color: red;
+    flex-grow: 1;
+  }
+  .glyphicon {
+    display: inline;
+    // background-color: red;
+    font-size: 1.6em;
+    margin-left: 20px;
+    // vertical-align: center;
+  }
 }
 
 /************************
