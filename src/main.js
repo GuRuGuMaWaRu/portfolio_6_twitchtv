@@ -6,10 +6,17 @@ import Stream from './components/streams/Stream';
 import SortButtons from './components/elements/SortButtons';
 
 class Main extends React.Component {
+
+  getData() {
+    $.getJSON('https://api.twitch.tv/kraken/streams/freecodecamp?callback=?', function(data) {
+      console.log(data);
+    });
+  }
+
   render() {
     return (
       <div>
-        <NavBar />
+        <NavBar getData={this.getData} />
         <div className="my-feature">
           <div className="wrapper">
             <Stream picture="FCC" name="FreeCodeCamp" status="Online" />
