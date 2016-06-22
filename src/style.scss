@@ -41,32 +41,29 @@ a {
 
 .my-navbar {
   @extend %my-flex;
-  // background-color: yellow;
   flex-direction: column;
   justify-content: space-between;
-  // flex-wrap: wrap;
   & h1 {
-    // background-color: red;
-    margin: 2rem 0;
+    margin: 1.5rem 0;
     text-align: center;
   }
-  &-input {
-    // background-color: green;
-    margin: 2rem 0;
-  }
   &-menu {
-    // background-color: red;
     @extend %my-flex;
-    justify-content: space-between;
+    background-color: grey;
+    justify-content: space-around;
     align-items: center;
-    &-item a {
-      // background-color: green;
-      // margin: 5px 10px;
-      text-align: center;
-      padding: 5px 10px;
-      border: 1px solid black;
-      display: block;
-      min-width: 70px;
+    &-item {
+      flex-grow: 1;
+      a {
+        text-align: center;
+        font-size: 1.4em;
+        padding: 15px;
+        display: block;
+        min-width: 70px;
+        &:hover {
+          background-color: darkgrey;
+        }
+      }
     }
   }
 }
@@ -77,19 +74,22 @@ a {
 
 .my-sort-buttons {
   @extend %my-flex;
-  // background-color: green;
-  justify-content: space-between;
+  background-color: lightgrey;
+  text-align: center;
+  justify-content: space-around;
   align-items: center;
-  margin: 2rem 0;
-  &-sort {
-    // background-color: red;
+  li {
+    padding: 15px;
     flex-grow: 1;
+    &:hover {
+      background-color: slategrey;
+    }
   }
   .glyphicon {
-    display: inline;
+    // display: inline;
     // background-color: red;
     font-size: 1.6em;
-    margin-left: 20px;
+    // margin-left: 20px;
     // vertical-align: center;
   }
 }

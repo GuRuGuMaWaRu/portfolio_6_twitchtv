@@ -1,19 +1,38 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'whatwg-fetch';
 import './style.scss';
 import NavBar from './components/nav/NavBar';
 import Stream from './components/streams/Stream';
 import SortButtons from './components/elements/SortButtons';
 
 class Main extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      streams: []
+    };
+    this.getData = this.getData.bind(this);
+  }
+
+  componentWillMount() {
+    fetch('https://api.twitch.tv/kraken/streams?callback=?')
+      .then(response => response.json())
+      .then(data => this.setState({streams: data}));
+  }
 
   getData() {
-    $.getJSON('https://api.twitch.tv/kraken/streams/freecodecamp?callback=?', function(data) {
-      console.log(data);
+    $.getJSON('https://api.twitch.tv/kraken/streams?callback=?', data => {
+      console.log(data.streams);
     });
+    console.log(this.state.streams);
   }
 
   render() {
+    // let streams = this.state.streams.map(function(stream) {
+    //   return <Stream picture="Warcraft" name={stream.game} status="Offline" />
+    //
+    // })
     return (
       <div>
         <NavBar getData={this.getData} />
@@ -24,9 +43,6 @@ class Main extends React.Component {
         </div>
         <div className="wrapper">
           <SortButtons />
-          <Stream picture="Warcraft" name="Warcraft" status="Offline" />
-          <Stream picture="Starcraft" name="Starcraft" status="Online" />
-          <Stream picture="Total War" name="Total War" status="Pending" />
         </div>
       </div>
     )
