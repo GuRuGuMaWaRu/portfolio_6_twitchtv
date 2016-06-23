@@ -10,29 +10,35 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      streams: []
+      streams: [],
+      streamsList: ''
     };
-    this.getData = this.getData.bind(this);
   }
 
   componentWillMount() {
-    fetch('https://api.twitch.tv/kraken/streams?callback=?')
-      .then(response => response.json())
-      .then(data => this.setState({streams: data}));
+    $.getJSON('https://api.twitch.tv/kraken/streams?callback=?', data => {
+      // console.log(data.streams[0]);
+      this.setState({streams: data.streams});
+    });
   }
 
-  getData() {
-    $.getJSON('https://api.twitch.tv/kraken/streams?callback=?', data => {
-      console.log(data.streams);
-    });
-    console.log(this.state.streams);
-  }
+  // componentDidMount() {
+  //   this.setState({streamsList: })
+  // }
 
   render() {
-    // let streams = this.state.streams.map(function(stream) {
-    //   return <Stream picture="Warcraft" name={stream.game} status="Offline" />
-    //
-    // })
+    // console.log(this.state.streams)
+    let dummyLogo = "https://dummyimage.com/300/ecf0e7/5c5457.jpg&text=0x3F",
+        streams = this.state.streams.map(function(stream) {
+          // console.log(stream.channel.logo);
+          return <Stream
+                  key={stream._id}
+                  logo={stream.channel.logo === null ? dummyLogo : stream.channel.logo}
+                  preview={stream.preview.medium}
+                  game={stream.game}
+                  link={stream.channel.url} />
+        });
+
     return (
       <div>
         <NavBar getData={this.getData} />
@@ -43,6 +49,9 @@ class Main extends React.Component {
         </div>
         <div className="wrapper">
           <SortButtons />
+          <div className="my-stream-list">
+            {streams}
+          </div>
         </div>
       </div>
     )
