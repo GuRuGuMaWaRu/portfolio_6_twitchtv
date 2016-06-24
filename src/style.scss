@@ -97,8 +97,15 @@ a:hover {
 }
 
 /************************
- STREAM LIST
+ STREAMS
 *************************/
+
+.my-ft-stream {
+  @extend %my-flex;
+  img {
+    width: 100%;
+  }
+}
 
 .my-stream-list {
     @extend %my-flex;
@@ -142,7 +149,7 @@ a:hover {
 
 img {
   width: 100%;
-  height: auto;
+  // height: auto;
 }
 
 .darken {
