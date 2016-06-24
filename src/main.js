@@ -22,10 +22,6 @@ class Main extends React.Component {
     });
   }
 
-  // componentDidMount() {
-  //   this.setState({streamsList: })
-  // }
-
   render() {
     // console.log(this.state.streams)
     let dummyLogo = "https://dummyimage.com/300/ecf0e7/5c5457.jpg&text=0x3F",
@@ -44,7 +40,7 @@ class Main extends React.Component {
         <NavBar getData={this.getData} />
         <div className="my-feature">
           <div className="wrapper">
-            <Stream picture="FCC" name="FreeCodeCamp" status="Online" />
+            <Stream logo="FCC" name="FreeCodeCamp" status="Online" />
           </div>
         </div>
         <div className="wrapper">
