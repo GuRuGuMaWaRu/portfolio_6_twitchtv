@@ -11,8 +11,7 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      streams: [],
-      streams2: []
+      streams: []
     };
   }
 
@@ -22,27 +21,26 @@ class Main extends React.Component {
     // });
     let channels = ["freecodecamp", "storbeck", "terakilobyte", "habathcx","RobotCaleb",
     "thomasballinger","noobs2ninjas","beohoff","brunofin","comster404","test_channel",
-    "cretetion","sheevergaming","TR7K","OgamingSC2","ESL_SC2"];
+    "cretetion","sheevergaming","TR7K","OgamingSC2","ESL_SC2"],
+        streams;
 
     channels.map(channel => {
       $.getJSON('https://api.twitch.tv/kraken/channels/' + channel + '?callback=?', data => {
-        let streams2 = this.state.streams2;
-
-        streams2.push(data);
-        this.setState({streams2});
+        streams = this.state.streams;
+        streams.push(data);
+        this.setState({streams});
       }).done(() => {
-        // console.log(this.state.streams2);
+        console.log(this.state.streams);
       });
     });
   }
 
   render() {
     let dummyLogo = "https://dummyimage.com/300/ecf0e7/5c5457.jpg&text=0x3F",
-        channels = ["freecodecamp", "storbeck", "terakilobyte", "habathcx","RobotCaleb",
-        "thomasballinger","noobs2ninjas","beohoff","brunofin","comster404","test_channel",
-        "cretetion","sheevergaming","TR7K","OgamingSC2","ESL_SC2"],
-        streams2 = this.state.streams2.map(function(stream, key) {
-          return <Stream key={key} logo={stream.logo} game={stream.game} link={stream.url}/>;
+        logo = "",
+        streams = this.state.streams.map(function(stream, key) {
+          logo = stream.logo === null || stream.logo === undefined ? dummyLogo : stream.logo;
+          return <Stream key={key} logo={logo} game={stream.game} link={stream.url}/>;
         });
 
 
@@ -71,7 +69,7 @@ class Main extends React.Component {
         <div className="wrapper">
           <SortButtons />
           <div className="my-stream-list">
-            {streams2}
+            {streams}
           </div>
         </div>
       </div>
