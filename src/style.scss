@@ -50,7 +50,7 @@ img {
   flex-direction: column;
   justify-content: space-between;
   & h1 {
-    margin: 1.5rem 0;
+    margin: 1rem 0;
     text-align: center;
   }
   &-menu {
@@ -92,11 +92,7 @@ img {
     }
   }
   .glyphicon {
-    // display: inline;
-    // background-color: red;
     font-size: 1.6em;
-    // margin-left: 20px;
-    // vertical-align: center;
   }
 }
 

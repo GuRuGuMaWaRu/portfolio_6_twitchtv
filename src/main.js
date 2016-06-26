@@ -15,22 +15,39 @@ class Main extends React.Component {
     };
   }
 
+  customForEach(items, fn) {
+    let i,
+        len = items.length;
+
+    for (i = 0; i < len; i++) {
+      fn(items[i], i, items);
+    }
+  }
+
   componentWillMount() {
-    // $.getJSON('https://api.twitch.tv/kraken/streams?callback=?', data => {
-    //   this.setState({streams: data.streams});
-    // });
+    $.getJSON('https://api.twitch.tv/kraken/streams/freecodecamp?callback=?', data => {
+      // console.log(data);
+    });
     let channels = ["freecodecamp", "storbeck", "terakilobyte", "habathcx","RobotCaleb",
     "thomasballinger","noobs2ninjas","beohoff","brunofin","comster404","test_channel",
     "cretetion","sheevergaming","TR7K","OgamingSC2","ESL_SC2"],
-        streams;
+        streams = [],
+        streamStatus = '';
 
-    channels.map(channel => {
-      $.getJSON('https://api.twitch.tv/kraken/channels/' + channel + '?callback=?', data => {
-        streams = this.state.streams;
-        streams.push(data);
-        this.setState({streams});
-      }).done(() => {
-        console.log(this.state.streams);
+    this.customForEach(channels, channel => {
+      $.getJSON('https://api.twitch.tv/kraken/streams/' + channel + '?callback=?', data => {
+        if (data.stream === null) {
+          streamStatus = 'offline';
+        } else if (data.error) {
+          streamStatus = 'closed';
+        } else {
+          streamStatus = 'online';
+        }
+        $.getJSON('https://api.twitch.tv/kraken/channels/' + channel + '?callback=?', data => {
+          streams = this.state.streams;
+          streams.push(data);
+          this.setState({streams});
+        });
       });
     });
   }
