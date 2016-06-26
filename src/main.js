@@ -39,14 +39,16 @@ class Main extends React.Component {
         if (data.stream === null) {
           streamStatus = 'offline';
         } else if (data.error) {
-          streamStatus = 'closed';
+          streamStatus = 'unavailable';
         } else {
           streamStatus = 'online';
         }
         $.getJSON('https://api.twitch.tv/kraken/channels/' + channel + '?callback=?', data => {
           streams = this.state.streams;
+          data.channelStatus = streamStatus;
           streams.push(data);
           this.setState({streams});
+          console.log(data);
         });
       });
     });
@@ -55,10 +57,15 @@ class Main extends React.Component {
   render() {
     let dummyLogo = "https://dummyimage.com/300/ecf0e7/5c5457.jpg&text=0x3F",
         logo = "",
-        streams = this.state.streams.map(function(stream, key) {
-          logo = stream.logo === null || stream.logo === undefined ? dummyLogo : stream.logo;
-          return <Stream key={key} logo={logo} game={stream.game} link={stream.url}/>;
-        });
+        streams = [];
+
+    streams = this.state.streams.map(function(stream, key) {
+      logo = stream.logo === null || stream.logo === undefined ? dummyLogo : stream.logo;
+      if (stream.channelStatus === 'closed') {
+        return <Stream key={key} logo={logo} name={stream.channelStatus} />;
+      }
+      return <Stream key={key} logo={logo} name={stream.channelStatus} game={stream.game} link={stream.url}/>;
+    });
 
 
         // streams = this.state.streams.map(function(stream) {

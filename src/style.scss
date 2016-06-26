@@ -18,9 +18,9 @@ a:hover {
   color: black;
 }
 
-img {
-  width: 100%;
-}
+// img {
+//   width: 100%;
+// }
 
 %my-flex {
   display: flex;
@@ -32,12 +32,6 @@ img {
 *************************/
 
 .wrapper {
-  width: 100%;
-}
-
-.my-feature {
-  background-color: darkgrey;
-  display: none;
   width: 100%;
 }
 
@@ -100,16 +94,16 @@ img {
  STREAMS
 *************************/
 
-.my-ft-stream {
-  @extend %my-flex;
-}
-
 .my-stream-list {
   @extend %my-flex;
   flex-wrap: wrap;
   .my-stream {
     position: relative;
-    width: 33.333333%;
+    // width: 33.333333%;
+    img {
+      width: 100%;
+      // background-size: 100% 100%;
+    }
     &:after,
     &:before {
       position: absolute;
@@ -126,7 +120,7 @@ img {
       background: rgba(0, 0, 0, 0.6);
     }
     &:before {
-      content: attr(data-content);
+      content: attr(data-game);
       color: #fff;
       z-index: 1;
       top: 50%;
