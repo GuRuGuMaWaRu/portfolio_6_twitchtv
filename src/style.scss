@@ -90,16 +90,18 @@ a:hover {
   }
 }
 
-/************************
+
+
+/*=======================
  STREAMS
-*************************/
+=======================*/
 
 .my-stream-list {
   @extend %my-flex;
   flex-wrap: wrap;
   .my-stream {
     position: relative;
-    // width: 33.333333%;
+    width: 50%;
     img {
       width: 100%;
       // background-size: 100% 100%;
@@ -135,14 +137,17 @@ a:hover {
   }
 }
 
-.my-stream.offline:before {
-  color: red;
-  font-size: 1.2em;
-}
+
 
 /************************
  MEDIA QUERIES
 *************************/
+@media (min-width: 600px) {
+  // LIST
+  .my-stream-list .my-stream {
+    width: 33.33%;
+  }
+}
 
 @media (min-width: 769px) {
   // MAIN STYLE
@@ -150,10 +155,6 @@ a:hover {
     width: 80%;
     max-width: 1000px;
     margin: 0 auto;
-  }
-  // FEATURE BLOCK
-  .my-feature {
-      display: block;
   }
   // NAV BLOCK
   .my-navbar {
@@ -166,10 +167,6 @@ a:hover {
       flex-grow: 1;
     }
   }
-  // LIST
-  .my-stream-list .my-stream {
-    width: 25%;
-  }
 }
 
 @media (min-width: 1025px) {
@@ -180,5 +177,8 @@ a:hover {
   .my-navbar-input {
     margin: 0 4em;
   }
-
+  // LIST
+  .my-stream-list .my-stream {
+    width: 25%;
+  }
 }
