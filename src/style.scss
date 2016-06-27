@@ -2,6 +2,14 @@
  GENERAL
 *************************/
 
+$menu-color   : grey;
+$menu-hover   : darkgrey;
+$sort-color   : lightgrey;
+$sort-hover   : slategrey;
+$stream-text  : #fff;
+
+$test-color-1 : brown;
+
 ul {
   padding: 0;
   margin: 0;
@@ -18,22 +26,16 @@ a:hover {
   color: black;
 }
 
-// img {
-//   width: 100%;
-// }
+.wrapper {
+  width: 100%;
+}
 
 %my-flex {
   display: flex;
   display: -webkit-flex;
 }
 
-/************************
- MAIN
-*************************/
 
-.wrapper {
-  width: 100%;
-}
 
 /************************
  NAVBAR
@@ -42,15 +44,13 @@ a:hover {
 .my-navbar {
   @extend %my-flex;
   flex-direction: column;
-  justify-content: space-between;
   & h1 {
     margin: 1rem 0;
     text-align: center;
   }
   &-menu {
     @extend %my-flex;
-    background-color: grey;
-    justify-content: space-around;
+    background-color: $menu-color;
     align-items: center;
     &-item {
       flex-grow: 1;
@@ -61,7 +61,7 @@ a:hover {
         display: block;
         min-width: 70px;
         &:hover {
-          background-color: darkgrey;
+          background-color: $menu-hover;
         }
       }
     }
@@ -74,7 +74,7 @@ a:hover {
 
 .my-sort-buttons {
   @extend %my-flex;
-  background-color: lightgrey;
+  background-color: $sort-color;
   text-align: center;
   justify-content: space-around;
   align-items: center;
@@ -82,7 +82,7 @@ a:hover {
     padding: 15px;
     flex-grow: 1;
     &:hover {
-      background-color: slategrey;
+      background-color: $sort-hover;
     }
   }
   .glyphicon {
@@ -96,44 +96,55 @@ a:hover {
  STREAMS
 =======================*/
 
-.my-stream-list {
+.stream-list {
   @extend %my-flex;
   flex-wrap: wrap;
-  .my-stream {
+  .stream {
+    color: $stream-text;
     position: relative;
     width: 50%;
     img {
       width: 100%;
       // background-size: 100% 100%;
     }
-    &:after,
-    &:before {
-      position: absolute;
-      width: 100%;
-      opacity: 1;
-      transition: all 0.5s;
-      -webkit-transition: all 0.5s;
-    }
-    &:after {
-      content: '';
-      height: 100%;
-      top: 0;
-      left: 0;
+    &-description {
       background: rgba(0, 0, 0, 0.6);
+      position: absolute;
+      // left: 50%;
+      bottom: 0;
+      width: 100%;
+      h4 {
+        text-align: center;
+      }
     }
-    &:before {
-      content: attr(data-game);
-      color: #fff;
-      z-index: 1;
-      top: 50%;
-      transform: translateY(-50%);
-      text-align: center;
-      vertical-align: middle;
-    }
-    &:hover:after,
-    &:hover:before {
-      opacity: 0;
-    }
+    // &:after,
+    // &:before {
+    //   position: absolute;
+    //   width: 100%;
+    //   opacity: 1;
+    //   transition: opacity 0.5s;
+    //   -webkit-transition: opacity 0.5s;
+    // }
+    // &:after {
+    //   content: '';
+    //   height: 30%;
+    //   bottom: 0;
+    //   left: 0;
+    //   background: rgba(0, 0, 0, 0.6);
+    // }
+    // &:before {
+    //   content: attr(data-game);
+    //   color: #fff;
+    //   z-index: 1;
+    //   top: 50%;
+    //   transform: translateY(-50%);
+    //   text-align: center;
+    //   vertical-align: middle;
+    // }
+    // &:hover:after,
+    // &:hover:before {
+    //   opacity: 0;
+    // }
   }
 }
 
@@ -144,13 +155,13 @@ a:hover {
 *************************/
 @media (min-width: 600px) {
   // LIST
-  .my-stream-list .my-stream {
+  .stream-list .my-stream {
     width: 33.33%;
   }
 }
 
 @media (min-width: 769px) {
-  // MAIN STYLE
+  // MAIN
   .wrapper {
     width: 80%;
     max-width: 1000px;
@@ -159,26 +170,20 @@ a:hover {
   // NAV BLOCK
   .my-navbar {
     flex-direction: row;
+    justify-content: space-between;
     & h1 {
       margin: 0;
-    }
-    &-input {
-      margin: 0 1em;
-      flex-grow: 1;
     }
   }
 }
 
 @media (min-width: 1025px) {
-  body {
-    background-color: brown;
-  }
   // NAV BLOCK
   .my-navbar-input {
     margin: 0 4em;
   }
   // LIST
-  .my-stream-list .my-stream {
+  .stream-list .stream {
     width: 25%;
   }
 }

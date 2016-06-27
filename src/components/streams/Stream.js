@@ -1,31 +1,46 @@
 import React from 'react';
 
-class Stream extends React.Component {
+export default class Stream extends React.Component {
 
   render() {
-    let style = {
-      backgroundImage: 'url(' + this.props.logo + ')'
-    };
+    let description = '',
+        style = {
+          backgroundImage: 'url(' + this.props.logo + ')'
+        };
+
+    // console.log(this.props.status);
+
+    if (this.props.status !== 'online') {
+      description = this.props.status;
+    } else {
+      description = this.props.game + ': ' + this.props.description;
+    }
 
     return (
-        <a className="my-stream" data-game={this.props.game + '/br' + this.props.name} href={this.props.link} target="_blank">
+        <a className="stream" href={this.props.link} target="_blank">
           <img src={this.props.logo} style={style} />
+          <div className="stream-description">
+            <h4>{this.props.name}</h4>
+            <p>{description}</p>
+          </div>
         </a>
     )
-    // if (this.props.game === "Offline" || this.props.game === "Account closed") {
-    //   return (
-    //       <a className="my-stream offline" data-content={this.props.game} href="#">
-    //         <img src={this.props.logo} />
-    //       </a>
-    //   );
-    // } else {
-    //   return (
-    //       <a className="my-stream" data-game={this.props.game + '/br' + this.props.name} href={this.props.link} target="_blank">
-    //         <img src={this.props.logo} />
-    //       </a>
-    //   );
-    // }
   }
 }
 
-export default Stream;
+Stream.propType = {
+  logo: React.PropTypes.string,
+  name: React.PropTypes.string,
+  game: React.PropTypes.string,
+  description: React.PropTypes.string,
+  status: React.PropTypes.string,
+  link: React.PropTypes.string
+};
+Stream.defaultProps = {
+  logo: '',
+  name: 'no name',
+  game: '',
+  description: '',
+  status: '',
+  link: ''
+}

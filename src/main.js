@@ -11,7 +11,8 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      streams: []
+      streams: [],
+      streamStatus: ''
     };
   }
 
@@ -25,30 +26,32 @@ class Main extends React.Component {
   }
 
   componentWillMount() {
-    $.getJSON('https://api.twitch.tv/kraken/streams/freecodecamp?callback=?', data => {
-      // console.log(data);
-    });
     let channels = ["freecodecamp", "storbeck", "terakilobyte", "habathcx","RobotCaleb",
     "thomasballinger","noobs2ninjas","beohoff","brunofin","comster404","test_channel",
     "cretetion","sheevergaming","TR7K","OgamingSC2","ESL_SC2"],
-        streams = [],
-        streamStatus = '';
+        streams = [];
 
     this.customForEach(channels, channel => {
+      let streamStatus = '';
       $.getJSON('https://api.twitch.tv/kraken/streams/' + channel + '?callback=?', data => {
         if (data.stream === null) {
           streamStatus = 'offline';
+          console.log('offline')
         } else if (data.error) {
-          streamStatus = 'unavailable';
+          streamStatus = 'no account';
+          console.log('no account')
         } else {
           streamStatus = 'online';
+          console.log('online')
         }
+      }).done(() => {
         $.getJSON('https://api.twitch.tv/kraken/channels/' + channel + '?callback=?', data => {
           streams = this.state.streams;
-          data.channelStatus = streamStatus;
+          data.streamStatus = streamStatus;
+          data.streamName = channel;
           streams.push(data);
           this.setState({streams});
-          console.log(data);
+          console.log(this.state.streams);
         });
       });
     });
@@ -59,40 +62,26 @@ class Main extends React.Component {
         logo = "",
         streams = [];
 
+
     streams = this.state.streams.map(function(stream, key) {
       logo = stream.logo === null || stream.logo === undefined ? dummyLogo : stream.logo;
-      if (stream.channelStatus === 'closed') {
-        return <Stream key={key} logo={logo} name={stream.channelStatus} />;
-      }
-      return <Stream key={key} logo={logo} name={stream.channelStatus} game={stream.game} link={stream.url}/>;
+
+      return <Stream key={key}
+                    logo={logo}
+                    name={stream.streamName}
+                    game={stream.game}
+                    description={stream.status}
+                    status={stream.streamStatus}
+                    link={stream.url} />;
     });
-
-
-        // streams = this.state.streams.map(function(stream) {
-        //   let status = '';
-        //   if (stream.channel === null) {
-        //     status = "Offline";
-        //   } else if (stream.channel === undefined) {
-        //     status = "Account closed";
-        //   } else {
-        //     status = stream.game;
-        //   }
-        //   return <Stream
-        //           key={stream._id}
-        //           logo={stream.channel.logo === null ? dummyLogo : stream.channel.logo}
-        //           game={status}
-        //           link={stream.channel.url} />
-        // });
 
 
     return (
       <div>
         <NavBar getData={this.getData} />
-        <div className="my-feature">
-        </div>
         <div className="wrapper">
           <SortButtons />
-          <div className="my-stream-list">
+          <div className="stream-list">
             {streams}
           </div>
         </div>
