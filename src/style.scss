@@ -7,6 +7,7 @@ $menu-hover   : darkgrey;
 $sort-color   : lightgrey;
 $sort-hover   : slategrey;
 $stream-text  : #fff;
+$offline-text : lighten(red, 20%);
 
 $test-color-1 : brown;
 
@@ -105,57 +106,32 @@ a:hover {
     width: 50%;
     img {
       width: 100%;
-      // background-size: 100% 100%;
     }
     &-description {
       background: rgba(0, 0, 0, 0.6);
       position: absolute;
-      // left: 50%;
       bottom: 0;
       width: 100%;
       h4 {
         text-align: center;
       }
     }
-    // &:after,
-    // &:before {
-    //   position: absolute;
-    //   width: 100%;
-    //   opacity: 1;
-    //   transition: opacity 0.5s;
-    //   -webkit-transition: opacity 0.5s;
-    // }
-    // &:after {
-    //   content: '';
-    //   height: 30%;
-    //   bottom: 0;
-    //   left: 0;
-    //   background: rgba(0, 0, 0, 0.6);
-    // }
-    // &:before {
-    //   content: attr(data-game);
-    //   color: #fff;
-    //   z-index: 1;
-    //   top: 50%;
-    //   transform: translateY(-50%);
-    //   text-align: center;
-    //   vertical-align: middle;
-    // }
-    // &:hover:after,
-    // &:hover:before {
-    //   opacity: 0;
-    // }
   }
 }
 
-
+.offline {
+  color: $offline-text;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+}
 
 /************************
  MEDIA QUERIES
 *************************/
 @media (min-width: 600px) {
   // LIST
-  .stream-list .my-stream {
+  .stream-list .stream {
     width: 33.33%;
   }
 }

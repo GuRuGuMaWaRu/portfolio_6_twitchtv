@@ -21,7 +21,7 @@ export default class Stream extends React.Component {
           <img src={this.props.logo} style={style} />
           <div className="stream-description">
             <h4>{this.props.name}</h4>
-            <p>{description}</p>
+            <p className={this.props.invalid ? "offline" : ""}>{description}</p>
           </div>
         </a>
     )

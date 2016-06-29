@@ -11,8 +11,7 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      streams: [],
-      streamStatus: ''
+      streams: []
     };
   }
 
@@ -44,7 +43,6 @@ class Main extends React.Component {
         }
       }).done(() => {
         $.getJSON('https://api.twitch.tv/kraken/channels/' + channel + '?callback=?', data => {
-          // streams = this.state.streams;
           data.streamStatus = streamStatus;
           data.streamName = channel;
           streams.push(data);
@@ -64,22 +62,9 @@ class Main extends React.Component {
         channels = ["freecodecamp", "storbeck", "terakilobyte", "habathcx","RobotCaleb",
           "thomasballinger","noobs2ninjas","beohoff","brunofin","comster404","test_channel",
           "cretetion","sheevergaming","TR7K","OgamingSC2","ESL_SC2"],
-        channel = "",
         logo = "",
-        testValue = false,
-        streams = [],
-        streams2 = [];
+        streams = [];
 
-    // for (let i = 0; i < 15; i++) {
-    //   logo = this.state.streams[i].logo === null || this.state.streams[i].logo === undefined ? dummyLogo : this.state.streams[i].logo;
-    //   channel = <Stream key={i}
-    //                 name={this.state.streams[i].streamName}
-    //                 game={this.state.streams[i].game}
-    //                 description={this.state.streams[i].status}
-    //                 status={this.state.streams[i].streamStatus}
-    //                 link={this.state.streams[i].url} />;
-    //   streams2.push(channel);
-    // }
 
     streams = this.state.streams.map(function(stream, key) {
       logo = stream.logo === null || stream.logo === undefined ? dummyLogo : stream.logo;
@@ -90,7 +75,8 @@ class Main extends React.Component {
                     game={stream.game}
                     description={stream.status}
                     status={stream.streamStatus}
-                    link={stream.url} />;
+                    link={stream.url}
+                    invalid={stream.streamStatus !== 'online' ? true : false} />;
     });
 
     return (
