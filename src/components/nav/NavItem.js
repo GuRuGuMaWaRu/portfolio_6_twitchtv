@@ -1,13 +1,17 @@
 import React from 'react';
 
-class NavItem extends React.Component {
+export default class NavItem extends React.Component {
+
   render() {
     return (
       <li className="my-navbar-menu-item">
-        <a href="#" onClick={this.props.clickHandler}>{this.props.label}</a>
+        <a href="#" onClick={event => this.props.clickHandler(this.props.label)}>{this.props.label}</a>
       </li>
     )
   }
 }
 
-export default NavItem;
+NavItem.propType = {
+  clickHandler: React.PropTypes.func,
+  label: React.PropTypes.string
+}

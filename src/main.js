@@ -11,8 +11,10 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      streams: []
+      streams: [],
+      streamsOriginal: []
     };
+    this.getData = this.getData.bind(this);
   }
 
   customForEach(items, fn) {
@@ -22,6 +24,26 @@ class Main extends React.Component {
     for (i = 0; i < len; i++) {
       fn(items[i], i, items);
     }
+  }
+
+  getData(label) {
+    let updStreams = this.state.streams;
+
+    updStreams = this.state.streamsOriginal.filter(stream => {
+      switch(label) {
+        case 'Online':
+          return stream.streamStatus === 'online';
+          break;
+        case 'Offline':
+          return stream.streamStatus !== 'online';
+          break;
+        case 'All':
+          return stream;
+          break;
+      }
+    });
+
+    this.setState({streams: updStreams});
   }
 
   componentWillMount() {
@@ -48,8 +70,8 @@ class Main extends React.Component {
           streams.push(data);
           itemsProcessed++;
           if (itemsProcessed === channels.length) {
-            this.setState({streams});
-            console.log(this.state.streams)
+            this.setState({streamsOriginal: streams, streams});
+            // console.log(this.state.streams);
           }
           // console.log(this.state.streams);
         });

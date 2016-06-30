@@ -8,7 +8,7 @@ export default class Stream extends React.Component {
           backgroundImage: 'url(' + this.props.logo + ')'
         };
 
-    console.log('rendering');
+    console.log('rendering stream');
 
     if (this.props.status !== 'online') {
       description = this.props.status;
