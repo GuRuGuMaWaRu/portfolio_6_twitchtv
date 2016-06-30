@@ -140,6 +140,16 @@ a:hover {
   }
 }
 
+@media (max-width: 768px) {
+  .my-sort-buttons {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    z-index: 999;
+  }
+}
+
 @media (min-width: 769px) {
   // MAIN
   .wrapper {
