@@ -122,6 +122,20 @@ a:hover {
   }
 }
 
+.stream-list.list {
+  flex-wrap: nowrap;
+  flex-direction: column;
+  .stream {
+    @extend %my-flex;
+    width: 100%;
+    margin: 0;
+    img {
+      width: 150px;
+      height: 150px;
+    }
+  }
+}
+
 .offline {
   color: $offline-text;
   font-weight: bold;

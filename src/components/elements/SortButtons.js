@@ -4,11 +4,11 @@ class SortButtons extends React.Component {
   render() {
     return (
       <ul className="my-sort-buttons">
-        <li>
+        <li onClick={event => this.props.changeLayout(event, 'table')}>
           <span className="glyphicon glyphicon-th" aria-hidden="true"></span>
           <span className="sr-only">Table view</span>
         </li>
-        <li>
+        <li onClick={event => this.props.changeLayout(event, 'list')}>
           <span className="glyphicon glyphicon-th-list" aria-hidden="true"></span>
           <span className="sr-only">List view</span>
         </li>

@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import 'whatwg-fetch';
 import './style.scss';
 import NavBar from './components/nav/NavBar';
-import Stream from './components/streams/Stream';
-import FeaturedStream from './components/streams/FeaturedStream';
+import TableItem from './components/streams/TableItem';
 import SortButtons from './components/elements/SortButtons';
 
 class Main extends React.Component {
@@ -12,9 +11,11 @@ class Main extends React.Component {
     super(props);
     this.state = {
       streams: [],
-      streamsOriginal: []
+      streamsOriginal: [],
+      layoutType: 'table'
     };
-    this.getData = this.getData.bind(this);
+    this.sortStreams = this.sortStreams.bind(this);
+    this.changeLayout = this.changeLayout.bind(this);
   }
 
   customForEach(items, fn) {
@@ -26,7 +27,7 @@ class Main extends React.Component {
     }
   }
 
-  getData(label) {
+  sortStreams(label) {
     let updStreams = this.state.streams;
 
     updStreams = this.state.streamsOriginal.filter(stream => {
@@ -44,6 +45,11 @@ class Main extends React.Component {
     });
 
     this.setState({streams: updStreams});
+  }
+
+  changeLayout(event, layoutType) {
+    event.preventDefault();
+    this.setState({layoutType});
   }
 
   componentWillMount() {
@@ -88,10 +94,10 @@ class Main extends React.Component {
         streams = [];
 
 
-    streams = this.state.streams.map(function(stream, key) {
+    streams = this.state.streams.map((stream, key) => {
       logo = stream.logo === null || stream.logo === undefined ? dummyLogo : stream.logo;
 
-      return <Stream key={key}
+      return <TableItem key={key}
                     logo={logo}
                     name={stream.streamName}
                     game={stream.game}
@@ -103,10 +109,10 @@ class Main extends React.Component {
 
     return (
       <div>
-        <NavBar getData={this.getData} />
+        <NavBar sortStreams={this.sortStreams} />
         <div className="wrapper">
-          <SortButtons />
-          <div className="stream-list">
+          <SortButtons changeLayout={this.changeLayout} />
+          <div className={this.state.layoutType === "table" ? "stream-list" : "stream-list list"}>
             {streams}
           </div>
         </div>

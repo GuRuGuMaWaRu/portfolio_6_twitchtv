@@ -8,9 +8,9 @@ export default class NavBar extends React.Component {
         <div className="wrapper my-navbar">
           <h1>TWITCH TV</h1>
           <ul className="my-navbar-menu">
-            <NavItem label="All" clickHandler={this.props.getData}/>
-            <NavItem label="Online" clickHandler={this.props.getData}/>
-            <NavItem label="Offline" clickHandler={this.props.getData}/>
+            <NavItem label="All" clickHandler={this.props.sortStreams}/>
+            <NavItem label="Online" clickHandler={this.props.sortStreams}/>
+            <NavItem label="Offline" clickHandler={this.props.sortStreams}/>
           </ul>
         </div>
       )
@@ -18,5 +18,5 @@ export default class NavBar extends React.Component {
 }
 
 NavBar.propType = {
-  getData: React.PropTypes.func
+  sortStreams: React.PropTypes.func
 }
