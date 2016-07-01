@@ -17,13 +17,14 @@ export default class Stream extends React.Component {
     }
 
     return (
-      <a className="stream" href={this.props.link} target="_blank">
-        <img src={this.props.logo} style={style} />
-        <div className="stream-description">
-          <h4>{this.props.name}</h4>
-          <p className={this.props.invalid ? "offline" : ""}>{description}</p>
-        </div>
-      </a>
+        <a className="stream" href={this.props.link} target="_blank">
+          <img src={this.props.logo} style={style} />
+          <div className="stream-description">
+            <h4>{this.props.name}</h4>
+            <p className={this.props.invalid ? "offline" : ""}>{description}</p>
+          </div>
+        </a>
+
     )
   }
 }

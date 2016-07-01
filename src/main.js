@@ -111,7 +111,7 @@ class Main extends React.Component {
       <div>
         <NavBar sortStreams={this.sortStreams} />
         <div className="wrapper">
-          <SortButtons changeLayout={this.changeLayout} />
+          <SortButtons layoutType={this.state.layoutType} changeLayout={this.changeLayout} />
           <div className={this.state.layoutType === "table" ? "stream-list" : "stream-list list"}>
             {streams}
           </div>

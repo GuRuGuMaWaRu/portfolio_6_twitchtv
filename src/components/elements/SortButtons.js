@@ -1,14 +1,14 @@
 import React from 'react';
 
-class SortButtons extends React.Component {
+export default class SortButtons extends React.Component {
   render() {
     return (
       <ul className="my-sort-buttons">
-        <li onClick={event => this.props.changeLayout(event, 'table')}>
+        <li className={this.props.layoutType === "table" ? "selected" : ""} onClick={event => this.props.changeLayout(event, 'table')}>
           <span className="glyphicon glyphicon-th" aria-hidden="true"></span>
           <span className="sr-only">Table view</span>
         </li>
-        <li onClick={event => this.props.changeLayout(event, 'list')}>
+        <li className={this.props.layoutType === "list" ? "selected" : ""} onClick={event => this.props.changeLayout(event, 'list')}>
           <span className="glyphicon glyphicon-th-list" aria-hidden="true"></span>
           <span className="sr-only">List view</span>
         </li>
@@ -17,4 +17,10 @@ class SortButtons extends React.Component {
   }
 }
 
-export default SortButtons;
+SortButtons.propType = {
+  changeLayout: React.PropTypes.func
+}
+
+SortButtons.defaultProps = {
+  changeLayout: 'table'
+}

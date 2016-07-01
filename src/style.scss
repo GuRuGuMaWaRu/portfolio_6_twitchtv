@@ -6,13 +6,19 @@ $black        : #000;
 
 $menu-color   : grey;
 $menu-hover   : darkgrey;
-$sort-color   : lightgrey;
-$sort-hover   : slategrey;
+$sort-hover   : lightgrey;
+$sort-color   : slategrey;
 $stream-text  : #fff;
 $offline-text : lighten(red, 20%);
 $list-bg-color: #f0f0f0;
+$divider-color: rgba(0,0,0, 0.14);
 
 $test-color-1 : brown;
+
+body {
+  font-family: 'Bungee', cursive;
+  font-family: 'Muli', sans-serif;
+}
 
 ul {
   padding: 0;
@@ -51,6 +57,7 @@ a:hover {
   & h1 {
     margin: 1rem 0;
     text-align: center;
+    align-self: center;
   }
   &-menu {
     @extend %my-flex;
@@ -64,6 +71,7 @@ a:hover {
         padding: 15px;
         display: block;
         min-width: 70px;
+        transition: background-color .3 ease;
         &:hover {
           background-color: $menu-hover;
         }
@@ -87,9 +95,13 @@ a:hover {
   li {
     padding: 15px;
     flex-grow: 1;
+    transition: background-color .3s ease;
     &:hover {
-      background-color: $sort-hover;
+      background-color: lighten($sort-hover, 20%);
     }
+  }
+  li.selected {
+    background-color: $sort-hover;
   }
   .glyphicon {
     font-size: 1.6em;
@@ -107,8 +119,10 @@ a:hover {
   flex-wrap: wrap;
   .stream {
     color: $stream-text;
+    box-sizing: border-box;
     position: relative;
     width: 49%;
+    border: 1px solid $divider-color;
     margin: 0.5%;
     img {
       width: 100%;
@@ -137,13 +151,13 @@ a:hover {
     @extend %my-flex;
     width: 100%;
     height: 100px;
-    border-bottom: 1px solid darkgrey;
+    border-bottom: 1px solid $divider-color;
     margin: 0;
     justify-content: space-around;
     align-items: center;
     img {
-      width: 80px;
-      height: 80px;
+      width: 60px;
+      height: 60px;
       border: 1px solid darkgrey;
       border-radius: 50%;
       margin: 0 2rem 0 1rem;
@@ -162,6 +176,11 @@ a:hover {
         margin: 0 1rem;
       }
     }
+  }
+  .divider {
+    width: 80%;
+    border-bottom: 1px solid $divider-color;
+    margin: 0 auto;
   }
 }
 
