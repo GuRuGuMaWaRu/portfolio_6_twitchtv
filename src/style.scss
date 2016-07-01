@@ -1,6 +1,8 @@
 /************************
  GENERAL
 *************************/
+$white        : #fff;
+$black        : #000;
 
 $menu-color   : grey;
 $menu-hover   : darkgrey;
@@ -8,6 +10,7 @@ $sort-color   : lightgrey;
 $sort-hover   : slategrey;
 $stream-text  : #fff;
 $offline-text : lighten(red, 20%);
+$list-bg-color: #f0f0f0;
 
 $test-color-1 : brown;
 
@@ -123,15 +126,37 @@ a:hover {
 }
 
 .stream-list.list {
+  background-color: $list-bg-color;
   flex-wrap: nowrap;
   flex-direction: column;
   .stream {
     @extend %my-flex;
     width: 100%;
+    height: 100px;
+    border-bottom: 1px solid darkgrey;
     margin: 0;
+    justify-content: space-around;
+    align-items: center;
     img {
-      width: 150px;
-      height: 150px;
+      width: 80px;
+      height: 80px;
+      border: 1px solid darkgrey;
+      border-radius: 50%;
+      margin: 0 2rem 0 1rem;
+    }
+    &-description {
+      @extend %my-flex;
+      background-color: $list-bg-color;
+      color: $black;
+      position: relative;
+      justify-content: space-between;
+      align-items: center;
+      h4 {
+        margin: 0;
+      }
+      p {
+        margin: 0 1rem;
+      }
     }
   }
 }

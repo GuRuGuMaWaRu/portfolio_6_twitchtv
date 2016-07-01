@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import 'whatwg-fetch';
 import './style.scss';
 import NavBar from './components/nav/NavBar';
-import TableItem from './components/streams/TableItem';
+import Stream from './components/streams/Stream';
 import SortButtons from './components/elements/SortButtons';
 
 class Main extends React.Component {
@@ -97,7 +97,7 @@ class Main extends React.Component {
     streams = this.state.streams.map((stream, key) => {
       logo = stream.logo === null || stream.logo === undefined ? dummyLogo : stream.logo;
 
-      return <TableItem key={key}
+      return <Stream key={key}
                     logo={logo}
                     name={stream.streamName}
                     game={stream.game}
