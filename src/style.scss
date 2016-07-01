@@ -121,6 +121,10 @@ a:hover {
       h4 {
         text-align: center;
       }
+      p {
+        text-align: center;
+        margin: 1rem;
+      }
     }
   }
 }
@@ -194,6 +198,13 @@ a:hover {
     width: 100%;
     z-index: 999;
   }
+  // lIST
+  .stream {
+    h4 {
+      font-size: 1.7rem;
+    }
+  }
+
   // FOOtER
   .footer {
     margin-top: 60px;
