@@ -116,6 +116,7 @@ class Main extends React.Component {
             {streams}
           </div>
         </div>
+        <div className="footer"></div>
       </div>
     );
   }

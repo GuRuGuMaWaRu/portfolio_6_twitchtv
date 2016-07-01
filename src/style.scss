@@ -181,10 +181,11 @@ a:hover {
 }
 
 @media (max-width: 768px) {
+  // NAV
   .my-navbar {
     margin-bottom: 3px;
   }
-
+  // SORT BUTTONS
   .my-sort-buttons {
     position: fixed;
     margin-bottom: 0;
@@ -192,6 +193,10 @@ a:hover {
     bottom: 0px;
     width: 100%;
     z-index: 999;
+  }
+  // FOOtER
+  .footer {
+    margin-top: 60px;
   }
 }
 
@@ -202,7 +207,7 @@ a:hover {
     max-width: 1000px;
     margin: 0 auto;
   }
-  // NAV BLOCK
+  // NAV
   .my-navbar {
     flex-direction: row;
     justify-content: space-between;
@@ -217,7 +222,7 @@ a:hover {
 }
 
 @media (min-width: 1025px) {
-  // NAV BLOCK
+  // NAV
   .my-navbar-input {
     margin: 0 4em;
   }
