@@ -12,6 +12,7 @@ class Main extends React.Component {
     this.state = {
       streams: [],
       streamsOriginal: [],
+      selectionType: 'all',
       layoutType: 'table'
     };
     this.sortStreams = this.sortStreams.bind(this);
@@ -32,13 +33,16 @@ class Main extends React.Component {
 
     updStreams = this.state.streamsOriginal.filter(stream => {
       switch(label) {
-        case 'Online':
+        case 'online':
+          this.setState({selectionType: 'online'});
           return stream.streamStatus === 'online';
           break;
-        case 'Offline':
+        case 'offline':
+          this.setState({selectionType: 'offline'});
           return stream.streamStatus !== 'online';
           break;
-        case 'All':
+        case 'all':
+          this.setState({selectionType: 'all'});
           return stream;
           break;
       }
@@ -77,9 +81,7 @@ class Main extends React.Component {
           itemsProcessed++;
           if (itemsProcessed === channels.length) {
             this.setState({streamsOriginal: streams, streams});
-            // console.log(this.state.streams);
           }
-          // console.log(this.state.streams);
         });
       });
     });
@@ -97,6 +99,15 @@ class Main extends React.Component {
     streams = this.state.streams.map((stream, key) => {
       logo = stream.logo === null || stream.logo === undefined ? dummyLogo : stream.logo;
 
+    window.addEventListener('scroll', function() {
+      console.log(document.getElementById('my-sort-buttons').scrollTop);
+      if (document.getElementById('my-sort-buttons').scrollTop > 100) {
+        document.getElementById('my-sort-buttons').classList.add('fixed');
+      } else {
+        document.getElementById('my-sort-buttons').classList.remove('fixed');
+      }
+    })
+
       return <Stream key={key}
                     logo={logo}
                     name={stream.streamName}
@@ -109,13 +120,13 @@ class Main extends React.Component {
 
     return (
       <div>
-        <NavBar sortStreams={this.sortStreams} />
-        <div className="wrapper">
+        <NavBar sortStreams={this.sortStreams} selectionType={this.state.selectionType} />
+        {/*<div className="wrapper">*/}
           <SortButtons layoutType={this.state.layoutType} changeLayout={this.changeLayout} />
-          <div className={this.state.layoutType === "table" ? "stream-list" : "stream-list list"}>
+          <div className={this.state.layoutType === "table" ? "wrapper stream-list" : "wrapper stream-list list"}>
             {streams}
           </div>
-        </div>
+        {/*</div>*/}
         <div className="footer"></div>
       </div>
     );

@@ -8,9 +8,9 @@ export default class NavBar extends React.Component {
         <div className="wrapper my-navbar">
           <h1>TWITCH TV</h1>
           <ul className="my-navbar-menu">
-            <NavItem label="All" clickHandler={this.props.sortStreams}/>
-            <NavItem label="Online" clickHandler={this.props.sortStreams}/>
-            <NavItem label="Offline" clickHandler={this.props.sortStreams}/>
+            <NavItem label="all" selectionType={this.props.selectionType} clickHandler={this.props.sortStreams}/>
+            <NavItem label="online" selectionType={this.props.selectionType} clickHandler={this.props.sortStreams}/>
+            <NavItem label="offline" selectionType={this.props.selectionType} clickHandler={this.props.sortStreams}/>
           </ul>
         </div>
       )
@@ -18,5 +18,6 @@ export default class NavBar extends React.Component {
 }
 
 NavBar.propType = {
-  sortStreams: React.PropTypes.func
+  sortStreams: React.PropTypes.func,
+  selectionType: React.PropTypes.string
 }
