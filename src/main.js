@@ -119,14 +119,12 @@ class Main extends React.Component {
     });
 
     return (
-      <div>
+      <div className="wrapper">
         <NavBar sortStreams={this.sortStreams} selectionType={this.state.selectionType} />
-        {/*<div className="wrapper">*/}
-          <SortButtons layoutType={this.state.layoutType} changeLayout={this.changeLayout} />
-          <div className={this.state.layoutType === "table" ? "wrapper stream-list" : "wrapper stream-list list"}>
-            {streams}
-          </div>
-        {/*</div>*/}
+        <SortButtons layoutType={this.state.layoutType} changeLayout={this.changeLayout} />
+        <div className={this.state.layoutType === "table" ? "wrapper stream-list" : "wrapper stream-list list"}>
+          {streams}
+        </div>
         <div className="footer"></div>
       </div>
     );

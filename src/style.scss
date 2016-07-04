@@ -60,6 +60,13 @@ a:hover {
   flex-direction: column;
   & h1 {
     margin: 1rem 0;
+
+    margin: 0;
+    font-size: 1.7em;
+    background-color: #E64A19;
+    color: $black;
+    width: 100%;
+
     text-align: center;
     align-self: center;
   }
@@ -70,6 +77,7 @@ a:hover {
     background-color: #F5F5F5;
     background-color: #FF5722;
     background-color: #FFCCBC;
+    background-color: darken(#FFCCBC, 20%);
     align-items: center;
     &-item {
       flex-grow: 1;
@@ -78,27 +86,30 @@ a:hover {
         color: $black;
         text-align: center;
         font-size: 1.2em;
-        padding: 15px;
+        // padding: 15px;
+        padding: 10px;
         // border-bottom: 15px solid #FF5722;
         display: block;
         min-width: 70px;
-        transition: background-color .3s ease;
+        transition: color .3s ease;
         &:hover {
           // background-color: $menu-hover;
           // background-color: lighten($black, 10%);
           // background-color: $test-color-5;
-          background-color: #E64A19;
-          background-color: darken(#FFCCBC, 20%);
+          // background-color: #E64A19;
+          // background-color: #FFCCBC;
           // border-bottom: 15px solid #E64A19;
+          color: $white;
         }
       }
       a.selected {
         // background-color: $menu-hover;
         // background-color: $black;
         // background-color: $test-color-5;
-        background-color: #E64A19;
-        background-color: darken(#FFCCBC, 20%);
+        // background-color: #E64A19;
+        // background-color: #FFCCBC;
         // border-bottom: 15px solid #E64A19;
+        color: $white;
       }
     }
   }
@@ -132,38 +143,39 @@ a:hover {
   //   z-index: 999;
   // }
   li {
-    padding: 15px;
+    padding: 10px;
     flex-grow: 1;
-    transition: background-color .3s ease;
+    // transition: color .3s ease;
     &:hover {
-      background-color: lighten($sort-hover, 20%);
-      background-color: lighten($black, 10%);
-      background-color: $test-color-5;
-      background-color: #FBC02D;
-      background-color: #E64A19;
-      // background-color: #F5F5F5;
+      // background-color: lighten($sort-hover, 20%);
+      // background-color: lighten($black, 10%);
+      // background-color: $test-color-5;
+      // background-color: #FBC02D;
+      // background-color: #E64A19;
     }
     &:hover .glyphicon {
       // font-size: 2em;
+      color: $white;
     }
     &.selected {
-      background-color: $sort-hover;
-      background-color: $black;
-      background-color: $test-color-5;
-      background-color: #FBC02D;
-      background-color: #E64A19;
-      // background-color: #F5F5F5;
+      // background-color: $sort-hover;
+      // background-color: $black;
+      // background-color: $test-color-5;
+      // background-color: #FBC02D;
+      // background-color: #E64A19;
     }
     &.selected .glyphicon {
       // font-size: 2em;
+      color: $white;
     }
   }
   .glyphicon {
     color: #212121;
-    color: $white;
+    // color: $black;
     // color: #212121;
-    font-size: 1.6em;
-    // transition: font-size .3s ease;
+    // font-size: 1.6em;
+    font-size: 1.4em;
+    transition: color .3s ease;
   }
 }
 
