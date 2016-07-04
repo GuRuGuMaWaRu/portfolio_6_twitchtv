@@ -182,6 +182,7 @@ a:hover {
     box-sizing: border-box;
     position: relative;
     width: 48%;
+    width: 31.33%;
     // border: 1px solid $divider-color;
     margin: 1%;
     img {
@@ -196,11 +197,13 @@ a:hover {
         text-align: center;
         font-weight: bold;
         font-size: 1em;
+        font-size: .8em;
       }
       p {
         text-align: center;
         margin: 1rem;
         font-size: .9em;
+        font-size: .7em;
       }
     }
   }
@@ -213,7 +216,7 @@ a:hover {
     @extend %my-flex;
     background-color: $list-bg-color;
     width: 100%;
-    height: 100px;
+    height: 80px;
     border-bottom: 1px solid $divider-color;
     margin: 0;
     justify-content: space-around;
@@ -263,6 +266,7 @@ a:hover {
   // LIST
   .stream-list .stream {
     width: 31.33%;
+    width: 23%;
   }
 }
 
@@ -321,6 +325,6 @@ a:hover {
   }
   // LIST
   .stream-list .stream {
-    width: 23%;
+    width: 18%;
   }
 }
