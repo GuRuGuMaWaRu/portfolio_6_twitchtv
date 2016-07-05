@@ -58,57 +58,39 @@ a:hover {
 .my-navbar {
   @extend %my-flex;
   flex-direction: column;
-  & h1 {
-    margin: 1rem 0;
-
-    margin: 0;
-    font-size: 1.7em;
-    background-color: #E64A19;
-    color: $black;
-    width: 100%;
-
-    text-align: center;
-    align-self: center;
+  position: fixed;
+  top: 0;
+  width: inherit;
+  max-width: 1000px;
+  z-index: 999;
+  &-header {
+    h1 {
+      margin: 0;
+      font-size: 1.7em;
+      background-color: #E64A19;
+      color: $black;
+      text-align: center;
+      align-self: center;
+    }
   }
   &-menu {
     @extend %my-flex;
-    background-color: $menu-color;
-    background-color: lighten($black, 20%);
-    background-color: #F5F5F5;
-    background-color: #FF5722;
-    background-color: #FFCCBC;
     background-color: darken(#FFCCBC, 20%);
     align-items: center;
     &-item {
       flex-grow: 1;
       a {
-        color: $white;
         color: $black;
         text-align: center;
         font-size: 1.2em;
-        // padding: 15px;
         padding: 10px;
-        // border-bottom: 15px solid #FF5722;
         display: block;
-        min-width: 70px;
         transition: color .3s ease;
         &:hover {
-          // background-color: $menu-hover;
-          // background-color: lighten($black, 10%);
-          // background-color: $test-color-5;
-          // background-color: #E64A19;
-          // background-color: #FFCCBC;
-          // border-bottom: 15px solid #E64A19;
           color: $white;
         }
       }
       a.selected {
-        // background-color: $menu-hover;
-        // background-color: $black;
-        // background-color: $test-color-5;
-        // background-color: #E64A19;
-        // background-color: #FFCCBC;
-        // border-bottom: 15px solid #E64A19;
         color: $white;
       }
     }
@@ -123,57 +105,22 @@ a:hover {
 
 #my-sort-buttons {
   @extend %my-flex;
-  background-color: $sort-color;
-  background-color: lighten($black, 20%);
-  background-color: $test-color-1;
-  background-color: #F5F5F5;
-  background-color: #B6B6B6;
-  background-color: lighten(#FBC02D, 20%);
   background-color: #FF5722;
-  // background-color: #F5F5F5;
-  // height: 58px;
-
   text-align: center;
   justify-content: space-around;
   align-items: center;
-  // .fixed & {
-  //   position: fixed;
-  //   width: 80%;
-  //   top: 0;
-  //   z-index: 999;
-  // }
   li {
     padding: 10px;
     flex-grow: 1;
-    // transition: color .3s ease;
-    &:hover {
-      // background-color: lighten($sort-hover, 20%);
-      // background-color: lighten($black, 10%);
-      // background-color: $test-color-5;
-      // background-color: #FBC02D;
-      // background-color: #E64A19;
-    }
     &:hover .glyphicon {
-      // font-size: 2em;
       color: $white;
     }
-    &.selected {
-      // background-color: $sort-hover;
-      // background-color: $black;
-      // background-color: $test-color-5;
-      // background-color: #FBC02D;
-      // background-color: #E64A19;
-    }
     &.selected .glyphicon {
-      // font-size: 2em;
       color: $white;
     }
   }
   .glyphicon {
     color: #212121;
-    // color: $black;
-    // color: #212121;
-    // font-size: 1.6em;
     font-size: 1.4em;
     transition: color .3s ease;
   }
@@ -188,33 +135,28 @@ a:hover {
 .stream-list {
   @extend %my-flex;
   flex-wrap: wrap;
+  margin-top: 3px;
   .stream {
     background-color: rgba(0, 0, 0, 0.7);
     color: $stream-text;
     box-sizing: border-box;
     position: relative;
-    width: 48%;
     width: 31.33%;
-    // border: 1px solid $divider-color;
     margin: 1%;
     img {
       width: 100%;
     }
     &-description {
-      // background: rgba(0, 0, 0);
-      // position: absolute;
       bottom: 0;
       width: 100%;
       h4 {
         text-align: center;
         font-weight: bold;
-        font-size: 1em;
         font-size: .8em;
       }
       p {
         text-align: center;
         margin: 1rem;
-        font-size: .9em;
         font-size: .7em;
       }
     }
@@ -224,6 +166,7 @@ a:hover {
 .stream-list.list {
   flex-wrap: nowrap;
   flex-direction: column;
+  margin-top: 0;
   .stream {
     @extend %my-flex;
     background-color: $list-bg-color;
@@ -255,11 +198,6 @@ a:hover {
       }
     }
   }
-  .divider {
-    width: 80%;
-    border-bottom: 1px solid $divider-color;
-    margin: 0 auto;
-  }
 }
 
 .offline {
@@ -277,15 +215,14 @@ a:hover {
 @media (min-width: 600px) {
   // LIST
   .stream-list .stream {
-    width: 31.33%;
     width: 23%;
   }
 }
 
 @media (max-width: 768px) {
   // NAV
-  .my-navbar {
-    margin-bottom: 3px;
+  .my-navbar a {
+    min-width: 70px;
   }
   // SORT BUTTONS
   #my-sort-buttons {
@@ -294,7 +231,7 @@ a:hover {
     left: 0px;
     bottom: 0px;
     width: 100%;
-    z-index: 999;
+    z-index: 899;
   }
   // lIST
   .stream {
@@ -302,17 +239,16 @@ a:hover {
       font-size: 1.7rem;
     }
   }
-
   // FOOtER
   .footer {
-    margin-top: 60px;
+    margin-top: 45px;
   }
 }
 
 @media (min-width: 769px) {
   // MAIN
   .wrapper {
-    width: 80%;
+    width: 70%;
     max-width: 1000px;
     margin: 0 auto;
   }
@@ -320,22 +256,34 @@ a:hover {
   .my-navbar {
     flex-direction: row;
     justify-content: space-between;
-    & h1 {
-      margin: 0;
+    &-header {
+      flex-grow: 1;
+      h1 {
+        margin: 0;
+        padding: 8px 20px;
+        background-color: darken(#FFCCBC, 20%);
+        text-align: left;
+      }
+    }
+    a {
+      padding: 8px 20px;
     }
   }
   // SORT BUTTONS
   #my-sort-buttons {
-    margin-bottom: 3px;
+    margin-bottom: 0;
+  }
+  // LIST
+  .stream-list {
+    margin-top: 3px;
   }
 }
 
-@media (min-width: 1025px) {
-  // NAV
-  .my-navbar-input {
-    margin: 0 4em;
-  }
+@media (min-width: 1000px) {
   // LIST
+  .stream-list {
+    margin-top: 3px;
+  }
   .stream-list .stream {
     width: 18%;
   }

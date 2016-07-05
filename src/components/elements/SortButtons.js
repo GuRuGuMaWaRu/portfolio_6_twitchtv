@@ -3,7 +3,7 @@ import React from 'react';
 export default class SortButtons extends React.Component {
   render() {
     return (
-      <ul id="my-sort-buttons" className="wrapper">
+      <ul id="my-sort-buttons">
         <li className={this.props.layoutType === "table" ? "selected" : ""} onClick={event => this.props.changeLayout(event, 'table')}>
           <span className="glyphicon glyphicon-th" aria-hidden="true"></span>
           <span className="sr-only">Table view</span>

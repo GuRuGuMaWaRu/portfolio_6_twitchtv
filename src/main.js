@@ -82,6 +82,8 @@ class Main extends React.Component {
           if (itemsProcessed === channels.length) {
             this.setState({streamsOriginal: streams, streams});
           }
+
+          console.log(data);
         });
       });
     });
@@ -100,6 +102,7 @@ class Main extends React.Component {
       logo = stream.logo === null || stream.logo === undefined ? dummyLogo : stream.logo;
 
     window.addEventListener('scroll', function() {
+      console.log('scrolling');
       console.log(document.getElementById('my-sort-buttons').scrollTop);
       if (document.getElementById('my-sort-buttons').scrollTop > 100) {
         document.getElementById('my-sort-buttons').classList.add('fixed');
@@ -122,7 +125,7 @@ class Main extends React.Component {
       <div className="wrapper">
         <NavBar sortStreams={this.sortStreams} selectionType={this.state.selectionType} />
         <SortButtons layoutType={this.state.layoutType} changeLayout={this.changeLayout} />
-        <div className={this.state.layoutType === "table" ? "wrapper stream-list" : "wrapper stream-list list"}>
+        <div className={this.state.layoutType === "table" ? "stream-list" : "wrapper stream-list list"}>
           {streams}
         </div>
         <div className="footer"></div>

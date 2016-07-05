@@ -5,8 +5,10 @@ export default class NavBar extends React.Component {
 
     render() {
       return (
-        <div className="wrapper my-navbar">
-          <h1>TWITCH</h1>
+        <div className="my-navbar">
+          <div className="my-navbar-header">
+            <h1>TWITCH</h1>
+          </div>
           <ul className="my-navbar-menu">
             <NavItem label="all" selectionType={this.props.selectionType} clickHandler={this.props.sortStreams}/>
             <NavItem label="online" selectionType={this.props.selectionType} clickHandler={this.props.sortStreams}/>
