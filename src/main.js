@@ -83,7 +83,7 @@ class Main extends React.Component {
             this.setState({streamsOriginal: streams, streams});
           }
 
-          console.log(data);
+          // console.log(data);
         });
       });
     });
@@ -101,9 +101,24 @@ class Main extends React.Component {
     streams = this.state.streams.map((stream, key) => {
       logo = stream.logo === null || stream.logo === undefined ? dummyLogo : stream.logo;
 
+    $(window).on('scroll', function(e) {
+      console.log($(this).scrollTop());
+      if ($(this).scrollTop() > 26) {
+        if (!$('.my-navbar-menu').hasClass('fixed')) {
+          console.log('add class');
+          $('.my-navbar-menu').addClass('fixed');
+        }
+      } else {
+        if ($('.my-navbar-menu').hasClass('fixed')) {
+          console.log('remove class');
+          $('.my-navbar-menu').removeClass('fixed');
+        }
+      }
+    });
+
     window.addEventListener('scroll', function() {
-      console.log('scrolling');
-      console.log(document.getElementById('my-sort-buttons').scrollTop);
+      // console.log(document.getElementsByClassName('my-navbar-menu');
+      // console.log(document.getElementsByTagName('body').scrollTop());
       if (document.getElementById('my-sort-buttons').scrollTop > 100) {
         document.getElementById('my-sort-buttons').classList.add('fixed');
       } else {
@@ -125,7 +140,7 @@ class Main extends React.Component {
       <div className="wrapper">
         <NavBar sortStreams={this.sortStreams} selectionType={this.state.selectionType} />
         <SortButtons layoutType={this.state.layoutType} changeLayout={this.changeLayout} />
-        <div className={this.state.layoutType === "table" ? "stream-list" : "wrapper stream-list list"}>
+        <div className={this.state.layoutType === "table" ? "stream-list" : "stream-list list"}>
           {streams}
         </div>
         <div className="footer"></div>

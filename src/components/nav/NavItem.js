@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default class NavItem extends React.Component {
-
   render() {
     return (
       <li className="my-navbar-menu-item">
