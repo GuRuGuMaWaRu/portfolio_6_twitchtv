@@ -79,13 +79,6 @@ a:hover {
     @extend %my-flex;
     background-color: darken(#FFCCBC, 20%);
     align-items: center;
-    &.fixed {
-      position:fixed;
-      top: 0;
-      width: 100%;
-      // max-width: 1000px;
-      z-index: 999;
-    }
     &-item {
       flex-grow: 1;
       a {
@@ -234,8 +227,17 @@ a:hover {
     // margin-top: 72px;
   }
   // NAV
-  .my-navbar a {
-    min-width: 70px;
+  .my-navbar {
+    &-menu.fixed {
+      position:fixed;
+      top: 0;
+      width: 100%;
+      max-width: 1000px;
+      z-index: 999;
+    }
+    a {
+      min-width: 70px;
+    }
   }
   // SORT BUTTONS
   #my-sort-buttons {
@@ -261,7 +263,7 @@ a:hover {
 @media (min-width: 769px) {
   // GLOBAL
   body {
-    // margin-top: 90px;
+    margin-top: 87px;
   }
   // MAIN
   .wrapper {
@@ -273,6 +275,13 @@ a:hover {
   .my-navbar {
     flex-direction: row;
     justify-content: space-between;
+    //== fixed navbar
+    position: fixed;
+    top: 0;
+    width: inherit;
+    max-width: 1000px;
+    z-index: 999;
+    //== end of fixed navbar
     &-header {
       flex-grow: 1;
       h1 {
@@ -288,12 +297,12 @@ a:hover {
   }
   // SORT BUTTONS
   #my-sort-buttons {
-    // margin-bottom: 0;
-    // position: fixed;
-    // width: inherit;
-    // max-width: 1000px;
-    // top: 42px;
-    // z-index: 999;
+    margin-bottom: 0;
+    position: fixed;
+    width: inherit;
+    max-width: 1000px;
+    top: 42px;
+    z-index: 999;
   }
   // LIST
   .stream-list {
