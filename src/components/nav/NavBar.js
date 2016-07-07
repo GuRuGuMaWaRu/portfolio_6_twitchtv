@@ -4,7 +4,7 @@ import NavItem from './NavItem';
 export default class NavBar extends React.Component {
   render() {
     return (
-      <div className="my-navbar">
+      <div className="my-navbar" id="test">
         <div className="my-navbar-header">
           <h1>TWITCH</h1>
         </div>

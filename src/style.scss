@@ -1,23 +1,24 @@
 /************************
  GENERAL
 *************************/
+
 $white        : #fff;
 $black        : #000;
 
-$menu-color   : grey;
-$menu-hover   : darkgrey;
-$sort-color   : lightgrey;
-$sort-hover   : slategrey;
-$stream-text  : #fff;
-$offline-text : lighten(red, 20%);
-$list-bg-color: #f0f0f0;
+$text-text    : #212121;
+$text-ui      : darken($white, 60%);
+$text-hover   : $white;
+$text-offline : lighten(red, 20%);
+
+$nav-header   : #E64A19;
+$nav-buttons  : darken(#FFCCBC, 20%);
+$nav-icons    : #FF5722;
+
+$stream-card  : rgba(0, 0, 0, 0.7);
+$stream-table : #f0f0f0;
+
 $divider-color: rgba(0,0,0, 0.14);
 
-$test-color-1 : #513B56;
-$test-color-2 : #525174;
-$test-color-3 : #348AA7;
-$test-color-4 : #5DD39E;
-$test-color-5 : #BCE784;
 
 body {
   font-family: 'Bungee', cursive;
@@ -37,7 +38,6 @@ a,
 a:link,
 a:hover {
   text-decoration: none;
-  color: black;
 }
 
 .wrapper {
@@ -49,8 +49,6 @@ a:hover {
   display: -webkit-flex;
 }
 
-
-
 /************************
  NAVBAR
 *************************/
@@ -58,47 +56,67 @@ a:hover {
 .my-navbar {
   @extend %my-flex;
   flex-direction: column;
-  //== fixed navbar
-  // position: fixed;
-  // top: 0;
-  // width: inherit;
-  // max-width: 1000px;
-  // z-index: 999;
-  //== end of fixed navbar
+  position: relative;
   &-header {
     h1 {
       margin: 0;
       font-size: 1.7em;
-      background-color: #E64A19;
-      color: $black;
+      background-color: $nav-header;
+      color: $text-text;
       text-align: center;
       align-self: center;
     }
   }
   &-menu {
     @extend %my-flex;
-    background-color: darken(#FFCCBC, 20%);
+    background-color: $nav-buttons;
     align-items: center;
     &-item {
       flex-grow: 1;
       a {
-        color: $black;
+        color: $text-ui;
+        position: relative;
+        background: url('./img/bg-circle.png') no-repeat;
+        background-size: 1% 1%;
+        background-position: center;
         text-align: center;
         font-size: 1.2em;
         padding: 10px;
+        height: 100%;
         display: block;
-        transition: color .3s ease;
+        -moz-transition: all .5s;
+        -webkit-transition: all .5s;
+        transition: all .5s;
+        // transition: color .3s ease, background-size 2s ease-in;
+        // -moz-transition: color .3s ease, background-size 2s ease-in;
+        // -ms-transition: color .3s ease, background-size 2s ease-in;
+        // -o-transition: color .3s ease, background-size 2s ease-in;
+        // -webkit-transition: color .3s ease, background-size 2s ease-in;
         &:hover {
-          color: $white;
+          color: $text-hover;
+          // border-bottom: 3px solid yellow;
         }
-      }
-      a.selected {
-        color: $white;
+        &:active {
+          background-size: 5000% 5000%;
+        }
+        &.selected {
+          color: $text-hover;
+          // border-bottom: 3px solid yellow;
+        }
       }
     }
   }
 }
 
+// .test {
+//   background-color: red;
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   height: 200px;
+//   width: 200px;
+//   border-radius: 50%;
+// }
 
 /************************
  SORT BUTTONS
@@ -106,29 +124,34 @@ a:hover {
 
 #my-sort-buttons {
   @extend %my-flex;
-  background-color: #FF5722;
+  background-color: $nav-icons;
   text-align: center;
   justify-content: space-around;
   align-items: center;
   li {
     padding: 10px;
+    // border-bottom: 3px solid $nav-icons;
     flex-grow: 1;
     cursor: pointer;
+    &:hover {
+      // border-bottom: 3px solid yellow;
+    }
+    &.selected {
+      // border-bottom: 3px solid yellow;
+    }
     &:hover .glyphicon {
-      color: $white;
+      color: $text-hover;
     }
     &.selected .glyphicon {
-      color: $white;
+      color: $text-hover;
     }
   }
   .glyphicon {
-    color: #212121;
+    color: $text-ui;
     font-size: 1.4em;
     transition: color .3s ease;
   }
 }
-
-
 
 /*=======================
  STREAMS
@@ -139,8 +162,8 @@ a:hover {
   flex-wrap: wrap;
   margin-top: 3px;
   .stream {
-    background-color: rgba(0, 0, 0, 0.7);
-    color: $stream-text;
+    background-color: $stream-card;
+    color: $text-hover;
     box-sizing: border-box;
     position: relative;
     width: 31.33%;
@@ -171,7 +194,7 @@ a:hover {
   margin-top: 0;
   .stream {
     @extend %my-flex;
-    background-color: $list-bg-color;
+    background-color: $stream-table;
     width: 100%;
     height: 80px;
     border-bottom: 1px solid $divider-color;
@@ -181,14 +204,13 @@ a:hover {
     img {
       width: 60px;
       height: 60px;
-      border: 1px solid darkgrey;
+      border: 1px solid $divider-color;
       border-radius: 50%;
       margin: 0 2rem 0 1rem;
     }
     &-description {
       @extend %my-flex;
-      background-color: $list-bg-color;
-      color: $black;
+      color: $text-text;
       position: relative;
       justify-content: space-between;
       align-items: center;
@@ -203,13 +225,11 @@ a:hover {
 }
 
 .offline {
-  color: $offline-text;
+  color: $text-offline;
   font-weight: bold;
   text-transform: uppercase;
   text-align: center;
 }
-
-
 
 /************************
  MEDIA QUERIES
@@ -222,10 +242,6 @@ a:hover {
 }
 
 @media (max-width: 768px) {
-  // GLOBAL
-  body {
-    // margin-top: 72px;
-  }
   // NAV
   .my-navbar {
     &-menu.fixed {
@@ -292,7 +308,7 @@ a:hover {
       }
     }
     a {
-      padding: 8px 20px;
+      padding: 10px 20px 9px;
     }
   }
   // SORT BUTTONS

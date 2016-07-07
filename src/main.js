@@ -28,8 +28,22 @@ class Main extends React.Component {
     }
   }
 
-  sortStreams(label) {
+  sortStreams(event, label) {
     let updStreams = this.state.streams;
+
+    // console.log(event);
+    let mouseX = event.clientX - (event.target.offsetLeft + document.getElementById('test').offsetLeft),
+        mouseY = event.clientY - (event.target.offsetTop + document.getElementById('test').offsetTop);
+
+    // event.target.style('background-position', mouseX + 'px ' + mouseY + 'px');
+    console.log('Clicked position', mouseX, mouseY);
+    console.log(mouseX + 'px ' + mouseY + 'px');
+    console.log($(this));
+    $(this).css({
+      'background-position': 'left'
+    })
+    // console.log(document.getElementById('test').offsetLeft);
+
 
     updStreams = this.state.streamsOriginal.filter(stream => {
       switch(label) {
