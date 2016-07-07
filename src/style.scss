@@ -82,8 +82,8 @@ a:hover {
     &.fixed {
       position:fixed;
       top: 0;
-      width: inherit;
-      max-width: 1000px;
+      width: 100%;
+      // max-width: 1000px;
       z-index: 999;
     }
     &-item {
