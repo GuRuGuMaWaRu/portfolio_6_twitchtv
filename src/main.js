@@ -30,21 +30,28 @@ class Main extends React.Component {
 
   sortStreams(event, label) {
     let updStreams = this.state.streams;
-
+/////////////////////////////////////////////////////////////////////
     // console.log(event);
     let mouseX = event.clientX - (event.target.offsetLeft + document.getElementById('test').offsetLeft),
-        mouseY = event.clientY - (event.target.offsetTop + document.getElementById('test').offsetTop);
+        mouseY = event.clientY - (event.target.offsetTop + document.getElementById('test').offsetTop),
+        newElement = document.createElement('span');
 
-    // event.target.style('background-position', mouseX + 'px ' + mouseY + 'px');
-    console.log('Clicked position', mouseX, mouseY);
-    console.log(mouseX + 'px ' + mouseY + 'px');
-    console.log($(this));
-    $(this).css({
-      'background-position': 'left'
-    })
-    // console.log(document.getElementById('test').offsetLeft);
+    // Remove any old elements
+    if (document.querySelector('.new-element')) {
+      document.querySelector('.new-element').remove();
+    }
 
+    newElement.classList.add('new-element');
+    newElement.style.top = (mouseY) + 'px';
+    newElement.style.left = (mouseX) + 'px';
+    document.getElementsByClassName('navbar-link')[0].appendChild(newElement);
+    window.setTimeout(() => {
+      document.getElementsByClassName('new-element')[0].classList.add('expanded');
+    }, 300, () => {
+      document.getElementsByClassName('navbar-link')[0].removeChild(document.getElementsByClassName('expanded')[0]);
+    });
 
+/////////////////////////////////////////////////////////////////////
     updStreams = this.state.streamsOriginal.filter(stream => {
       switch(label) {
         case 'online':

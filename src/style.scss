@@ -76,9 +76,9 @@ a:hover {
       a {
         color: $text-ui;
         position: relative;
-        background: url('./img/bg-circle.png') no-repeat;
-        background-size: 1% 1%;
-        background-position: center;
+        // background: url('./img/bg-circle.png') no-repeat;
+        // background-size: 1% 1%;
+        // background-position: left left;
         text-align: center;
         font-size: 1.2em;
         padding: 10px;
@@ -92,31 +92,39 @@ a:hover {
         // -ms-transition: color .3s ease, background-size 2s ease-in;
         // -o-transition: color .3s ease, background-size 2s ease-in;
         // -webkit-transition: color .3s ease, background-size 2s ease-in;
+        overflow: hidden;
         &:hover {
           color: $text-hover;
-          // border-bottom: 3px solid yellow;
         }
-        &:active {
-          background-size: 5000% 5000%;
-        }
+        // &:active {
+        //   background-size: 5000% 5000%;
+        // }
+        // &.enlarge {
+        //   background-size: 5000% 5000%;
+        // }
         &.selected {
           color: $text-hover;
-          // border-bottom: 3px solid yellow;
         }
       }
     }
   }
 }
 
-// .test {
-//   background-color: red;
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   height: 200px;
-//   width: 200px;
-//   border-radius: 50%;
-// }
+.new-element {
+  background-color: rgba(255,255,255,0.4);
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  border-radius: 50%;
+  opacity: 1;
+  transition: all .3s ease-out;
+  transform-origin: center;
+}
+
+.new-element.expanded {
+  transform: scale(100,100);
+  opacity: 0;
+}
 
 /************************
  SORT BUTTONS
