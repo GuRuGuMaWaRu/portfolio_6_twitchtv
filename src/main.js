@@ -119,15 +119,15 @@ class Main extends React.Component {
       logo = stream.logo === null || stream.logo === undefined ? dummyLogo : stream.logo;
 
     $(window).on('scroll', function(e) {
-      console.log($(this).scrollTop());
+      // console.log($(this).scrollTop());
       if ($(this).scrollTop() > 26) {
         if (!$('.my-navbar-menu').hasClass('fixed')) {
-          console.log('add class');
+          // console.log('add class');
           $('.my-navbar-menu').addClass('fixed');
         }
       } else {
         if ($('.my-navbar-menu').hasClass('fixed')) {
-          console.log('remove class');
+          // console.log('remove class');
           $('.my-navbar-menu').removeClass('fixed');
         }
       }
@@ -156,7 +156,7 @@ class Main extends React.Component {
     return (
       <div className="wrapper">
         <NavBar sortStreams={this.sortStreams} selectionType={this.state.selectionType} />
-        <SortButtons layoutType={this.state.layoutType} changeLayout={this.changeLayout} />
+        {/*<SortButtons layoutType={this.state.layoutType} changeLayout={this.changeLayout} />*/}
         <div className={this.state.layoutType === "table" ? "stream-list" : "stream-list list"}>
           {streams}
         </div>

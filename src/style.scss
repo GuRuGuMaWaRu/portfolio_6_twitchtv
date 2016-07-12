@@ -50,9 +50,9 @@ a:hover {
   text-decoration: none;
 }
 
-.wrapper {
-  width: 100%;
-}
+// .wrapper {
+//   width: 100%;
+// }
 
 %my-flex {
   display: flex;
@@ -74,8 +74,15 @@ a:hover {
       background-color: $nav-header;
       color: $text-text;
       text-align: center;
-      align-self: center;
+      // align-self: center;
     }
+  }
+  &-menu.fixed {
+    position:fixed;
+    top: 0;
+    width: 100%;
+    max-width: 1000px;
+    z-index: 999;
   }
   &-menu {
     @extend %my-flex;
@@ -140,36 +147,29 @@ a:hover {
  SORT BUTTONS
 *************************/
 
-#my-sort-buttons {
-  @extend %my-flex;
-  background-color: $nav-icons;
-  text-align: center;
-  justify-content: space-around;
-  align-items: center;
-  li {
-    padding: 10px;
-    // border-bottom: 3px solid $nav-icons;
-    flex-grow: 1;
-    cursor: pointer;
-    &:hover {
-      // border-bottom: 3px solid yellow;
-    }
-    &.selected {
-      // border-bottom: 3px solid yellow;
-    }
-    &:hover .glyphicon {
-      color: $text-hover;
-    }
-    &.selected .glyphicon {
-      color: $text-hover;
-    }
-  }
-  .glyphicon {
-    color: $text-ui;
-    font-size: 1.4em;
-    transition: color .3s ease;
-  }
-}
+// #my-sort-buttons {
+//   @extend %my-flex;
+//   background-color: $nav-icons;
+//   text-align: center;
+//   justify-content: space-around;
+//   align-items: center;
+//   li {
+//     padding: 10px;
+//     flex-grow: 1;
+//     cursor: pointer;
+//     &:hover .glyphicon {
+//       color: $text-hover;
+//     }
+//     &.selected .glyphicon {
+//       color: $text-hover;
+//     }
+//   }
+//   .glyphicon {
+//     color: $text-ui;
+//     font-size: 1.4em;
+//     transition: color .3s ease;
+//   }
+// }
 
 /*=======================
  STREAMS
@@ -276,14 +276,14 @@ a:hover {
     }
   }
   // SORT BUTTONS
-  #my-sort-buttons {
-    position: fixed;
-    margin-bottom: 0;
-    left: 0px;
-    bottom: 0px;
-    width: 100%;
-    z-index: 899;
-  }
+  // #my-sort-buttons {
+  //   position: fixed;
+  //   margin-bottom: 0;
+  //   left: 0px;
+  //   bottom: 0px;
+  //   width: 100%;
+  //   z-index: 899;
+  // }
   // lIST
   .stream {
     h4 {
@@ -299,7 +299,7 @@ a:hover {
 @media (min-width: 769px) {
   // GLOBAL
   body {
-    margin-top: 87px;
+    // margin-top: 87px;
   }
   // MAIN
   .wrapper {
@@ -309,14 +309,14 @@ a:hover {
   }
   // NAV
   .my-navbar {
-    flex-direction: row;
-    justify-content: space-between;
+    // flex-direction: row;
+    // justify-content: space-between;
     //== fixed navbar
-    position: fixed;
-    top: 0;
-    width: inherit;
-    max-width: 1000px;
-    z-index: 999;
+    // position: fixed;
+    // top: 0;
+    // width: inherit;
+    // max-width: 1000px;
+    // z-index: 999;
     //== end of fixed navbar
     &-header {
       flex-grow: 1;
@@ -324,7 +324,7 @@ a:hover {
         margin: 0;
         padding: 8px 20px;
         // background-color: darken(#FFCCBC, 20%);
-        text-align: left;
+        // text-align: left;
       }
     }
     a {
@@ -332,14 +332,14 @@ a:hover {
     }
   }
   // SORT BUTTONS
-  #my-sort-buttons {
-    margin-bottom: 0;
-    position: fixed;
-    width: inherit;
-    max-width: 1000px;
-    top: 42px;
-    z-index: 999;
-  }
+  // #my-sort-buttons {
+  //   margin-bottom: 0;
+  //   position: fixed;
+  //   width: inherit;
+  //   max-width: 1000px;
+  //   top: 42px;
+  //   z-index: 999;
+  // }
   // LIST
   .stream-list {
     margin-top: 3px;
