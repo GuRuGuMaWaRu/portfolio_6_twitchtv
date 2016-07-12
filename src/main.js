@@ -12,7 +12,7 @@ class Main extends React.Component {
     this.state = {
       streams: [],
       streamsOriginal: [],
-      selectionType: 'all',
+      selectionType: 'A-Z',
       layoutType: 'table'
     };
     this.sortStreams = this.sortStreams.bind(this);
@@ -54,17 +54,13 @@ class Main extends React.Component {
 /////////////////////////////////////////////////////////////////////
     updStreams = this.state.streamsOriginal.filter(stream => {
       switch(label) {
-        case 'online':
-          this.setState({selectionType: 'online'});
-          return stream.streamStatus === 'online';
+        case 'A-Z':
+          this.setState({selectionType: 'A-Z'});
+          return stream.streamStatus === 'Z-A';
           break;
-        case 'offline':
-          this.setState({selectionType: 'offline'});
-          return stream.streamStatus !== 'online';
-          break;
-        case 'all':
-          this.setState({selectionType: 'all'});
-          return stream;
+        case 'Z-A':
+          this.setState({selectionType: 'Z-A'});
+          return stream.streamStatus !== 'Z-A';
           break;
       }
     });

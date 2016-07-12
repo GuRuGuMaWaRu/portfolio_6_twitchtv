@@ -4,23 +4,33 @@
 
 $white        : #fff;
 $black        : #000;
+$black        : lighten(#000, 10%);
 
-$text-text    : #212121;
+
+// $text-text    : #212121;
+$text-text    : $white;
 $text-ui      : darken($white, 60%);
 $text-hover   : $white;
 $text-offline : lighten(red, 20%);
 
-$nav-header   : #E64A19;
-$nav-buttons  : darken(#FFCCBC, 20%);
-$nav-icons    : #FF5722;
+// $nav-header   : #E64A19;
+$nav-header   : $black;
+// $nav-buttons  : darken(#FFCCBC, 20%);
+$nav-buttons  : $black;
+// $nav-icons    : #FF5722;
+$nav-icons    : $black;
+$bg-body      : lighten(#000, 20%);
+$bg-list      : lighten(#000, 20%);
 
-$stream-card  : rgba(0, 0, 0, 0.7);
+// $stream-card  : rgba(0, 0, 0, 0.7);
+$stream-card  : $black;
 $stream-table : #f0f0f0;
 
 $divider-color: rgba(0,0,0, 0.14);
 
 
 body {
+  background-color: $bg-body;
   font-family: 'Bungee', cursive;
   font-family: 'Muli', sans-serif;
 }
@@ -167,15 +177,17 @@ a:hover {
 
 .stream-list {
   @extend %my-flex;
+  background-color: $bg-list;
   flex-wrap: wrap;
-  margin-top: 3px;
+  // margin-top: 3px;
+  padding-top: 3px;
   .stream {
     background-color: $stream-card;
     color: $text-hover;
     box-sizing: border-box;
     position: relative;
-    width: 31.33%;
-    margin: 1%;
+    width: 32.33%;
+    margin: 0.5%;
     img {
       width: 100%;
     }
@@ -245,7 +257,7 @@ a:hover {
 @media (min-width: 600px) {
   // LIST
   .stream-list .stream {
-    width: 23%;
+    width: 24%;
   }
 }
 
@@ -311,7 +323,7 @@ a:hover {
       h1 {
         margin: 0;
         padding: 8px 20px;
-        background-color: darken(#FFCCBC, 20%);
+        // background-color: darken(#FFCCBC, 20%);
         text-align: left;
       }
     }
@@ -340,6 +352,6 @@ a:hover {
     margin-top: 3px;
   }
   .stream-list .stream {
-    width: 18%;
+    width: 19%;
   }
 }

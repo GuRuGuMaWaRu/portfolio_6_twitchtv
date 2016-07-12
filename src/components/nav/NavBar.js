@@ -9,9 +9,8 @@ export default class NavBar extends React.Component {
           <h1>TWITCH</h1>
         </div>
         <ul className="my-navbar-menu">
-          <NavItem label="all" selectionType={this.props.selectionType} clickHandler={this.props.sortStreams}/>
-          <NavItem label="online" selectionType={this.props.selectionType} clickHandler={this.props.sortStreams}/>
-          <NavItem label="offline" selectionType={this.props.selectionType} clickHandler={this.props.sortStreams}/>
+          <NavItem label="A-Z" selectionType={this.props.selectionType} clickHandler={this.props.sortStreams}/>
+          <NavItem label="Z-A" selectionType={this.props.selectionType} clickHandler={this.props.sortStreams}/>
         </ul>
       </div>
     )
