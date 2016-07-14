@@ -6,7 +6,7 @@ export default class NavItem extends React.Component {
       <li className="nav-menu-buttons-item">
         <a  className={this.props.selectionType === this.props.label ? "selected nav-link" : "nav-link"}
             href="#"
-            onClick={() => this.props.clickHandler(this.props.label)}>
+            onClick={(event) => this.props.clickHandler(event, this.props.label)}>
           {this.props.label}
           {/*<span className="new-element"></span>*/}
         </a>

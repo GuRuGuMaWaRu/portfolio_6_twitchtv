@@ -11,12 +11,11 @@ class Main extends React.Component {
     super(props);
     this.state = {
       streams: [],
-      // streamsOriginal: [],
       selectionType: 'A-Z',
       layoutType: 'table'
     };
     this.sortStreams = this.sortStreams.bind(this);
-    // this.changeLayout = this.changeLayout.bind(this);
+    this.clickButton = this.clickButton.bind(this);
   }
 
   customForEach(items, fn) {
@@ -29,29 +28,6 @@ class Main extends React.Component {
   }
 
   sortStreams(label) {
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // console.log(event);
-    // let mouseX = event.clientX - (event.target.offsetLeft + document.getElementById('test').offsetLeft),
-    //     mouseY = event.clientY - (event.target.offsetTop + document.getElementById('test').offsetTop),
-    //     newElement = document.createElement('span');
-
-    // Remove any old elements
-    // if (document.querySelector('.new-element')) {
-    //   document.querySelector('.new-element').remove();
-    // }
-    //
-    // newElement.classList.add('new-element');
-    // newElement.style.top = (mouseY) + 'px';
-    // newElement.style.left = (mouseX) + 'px';
-    // document.getElementsByClassName('nav-link')[0].appendChild(newElement);
-    // window.setTimeout(() => {
-    //   document.getElementsByClassName('new-element')[0].classList.add('expanded');
-    // }, 300, () => {
-    //   document.getElementsByClassName('nav-link')[0].removeChild(document.getElementsByClassName('expanded')[0]);
-    // });
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     // 1 - setup
     let sortOrder = label === 'A-Z' ? 1 : -1,
         sortedStreams = this.state.streams,
@@ -82,6 +58,55 @@ class Main extends React.Component {
     finalStreams = onlineStreams.concat(offlineStreams);
     // 6 - save sorted streams
     this.setState({streams: finalStreams});
+  }
+
+  clickButton(event, label) {
+    // console.log('mouse click X:',event.pageX);
+    console.log('event.clientX:',event.clientX);
+    console.log('posX:',event.target.offsetLeft);
+    console.log('posXMain:',document.getElementById('nav-menu-buttons').offsetLeft);
+    // console.log('mouse click Y:',event.pageY);
+    console.log('event.clientY:',event.clientY);
+    console.log('posY:',event.target.offsetTop);
+    console.log('posYMain:',document.getElementById('nav-menu-buttons').offsetTop);
+
+
+    event.preventDefault();
+    // 1 - setup
+    let posX = event.target.offsetLeft,
+        posY = event.target.offsetTop,
+        posXMain = document.getElementById('nav-menu-buttons').offsetLeft,
+        posYMain = document.getElementById('nav-menu-buttons').offsetTop,
+        buttonWidth = event.target.offsetWidth,
+        buttonHeight =  event.target.offsetHeight;
+    // 2 - remove any old ripple element
+    $(".ripple").remove();
+    // 3 - add new ripple element
+    let newRipple = document.createElement('span');
+    newRipple.classList.add('ripple');
+    event.target.appendChild(newRipple);
+    // 4 - make it round
+     if (buttonWidth >= buttonHeight) {
+       buttonHeight = buttonWidth;
+     } else {
+       buttonWidth = buttonHeight;
+     }
+     // 5 - get the center of the element
+    //  var x = event.pageX - posX - buttonWidth / 2;
+    //  var y = event.pageY - posY - buttonHeight / 2;
+    var x = event.clientX - (posX + posXMain);
+    console.log('LEFT:', event.clientX - (posX + posXMain));
+    var y = event.clientY - posYMain;
+    console.log('TOP:', event.clientY - posYMain);
+     // 6 - add the ripples CSS and start the animation
+     $(".ripple").css({
+       width: buttonWidth,
+       height: buttonHeight,
+       top: y + 'px',
+       left: x + 'px'
+     }).addClass("rippleEffect");
+    // 7 - sort streams
+    this.sortStreams(label);
   }
 
   componentWillMount() {
@@ -152,7 +177,7 @@ class Main extends React.Component {
 
     return (
       <div>
-        <NavBar sortStreams={this.sortStreams} selectionType={this.state.selectionType} />
+        <NavBar clickButton={this.clickButton} selectionType={this.state.selectionType} />
         {/*<SortButtons layoutType={this.state.layoutType} changeLayout={this.changeLayout} />*/}
         <div className="wrapper">
           <div className={this.state.layoutType === "table" ? "stream-list" : "stream-list list"}>
