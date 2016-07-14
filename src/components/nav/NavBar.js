@@ -14,6 +14,7 @@ export default class NavBar extends React.Component {
           <ul className="wrapper nav-menu-buttons">
             <NavItem label="A-Z" selectionType={this.props.selectionType} clickHandler={this.props.sortStreams}/>
             <NavItem label="Z-A" selectionType={this.props.selectionType} clickHandler={this.props.sortStreams}/>
+            <div className={this.props.selectionType === "A-Z" ? "selection-bar left" : "selection-bar right"}></div>
           </ul>
         </div>
       </div>

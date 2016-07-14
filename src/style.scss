@@ -89,7 +89,24 @@ a:hover {
     &-buttons {
       @extend %my-flex;
       background-color: $nav-buttons;
+      position: relative;
       align-items: center;
+      .selection-bar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 50%;
+        height: 10%;
+        background-color: orange;
+        opacity: 0.7;
+        transition: all .4s ease;
+        &.left {
+          transform: translateX(0);
+        }
+        &.right {
+          transform: translateX(100%);
+        }
+      }
       &-item {
         flex-grow: 1;
         a {
@@ -98,6 +115,7 @@ a:hover {
           text-align: center;
           font-size: 1.2em;
           padding: 10px;
+          // border-bottom: 5px solid orange;
           margin: 0;
           height: 100%;
           display: block;
