@@ -33,6 +33,7 @@ body {
   background-color: $bg-body;
   font-family: 'Bungee', cursive;
   font-family: 'Muli', sans-serif;
+  margin: 0;
 }
 
 ul {
@@ -50,10 +51,6 @@ a:hover {
   text-decoration: none;
 }
 
-// .wrapper {
-//   width: 100%;
-// }
-
 %my-flex {
   display: flex;
   display: -webkit-flex;
@@ -63,64 +60,57 @@ a:hover {
  NAVBAR
 *************************/
 
-.my-navbar {
+.nav {
   @extend %my-flex;
   flex-direction: column;
   position: relative;
+  // width: 100%;
+  // max-width: 1000px;
   &-header {
+    background-color: $nav-header;
     h1 {
       margin: 0;
       font-size: 1.7em;
-      background-color: $nav-header;
+      // background-color: $nav-header;
       color: $text-text;
       text-align: center;
       // align-self: center;
     }
   }
-  &-menu.fixed {
-    position:fixed;
-    top: 0;
-    width: 100%;
-    max-width: 1000px;
-    z-index: 999;
-  }
   &-menu {
-    @extend %my-flex;
-    background-color: $nav-buttons;
-    align-items: center;
-    &-item {
-      flex-grow: 1;
-      a {
-        color: $text-ui;
-        position: relative;
-        // background: url('./img/bg-circle.png') no-repeat;
-        // background-size: 1% 1%;
-        // background-position: left left;
-        text-align: center;
-        font-size: 1.2em;
-        padding: 10px;
-        height: 100%;
-        display: block;
-        -moz-transition: all .5s;
-        -webkit-transition: all .5s;
-        transition: all .5s;
-        // transition: color .3s ease, background-size 2s ease-in;
-        // -moz-transition: color .3s ease, background-size 2s ease-in;
-        // -ms-transition: color .3s ease, background-size 2s ease-in;
-        // -o-transition: color .3s ease, background-size 2s ease-in;
-        // -webkit-transition: color .3s ease, background-size 2s ease-in;
-        overflow: hidden;
-        &:hover {
-          color: $text-hover;
-        }
-        // &:active {
-        //   background-size: 5000% 5000%;
-        // }
-        // &.enlarge {
-        //   background-size: 5000% 5000%;
-        // }
-        &.selected {
-          color: $text-hover;
+    background-color: $nav-header;
+    &.fixed {
+      position:fixed;
+      top: 0;
+      width: 100%;
+      // max-width: 1000px;
+      z-index: 999;
+    }
+    &-buttons {
+      @extend %my-flex;
+      background-color: $nav-buttons;
+      align-items: center;
+      &-item {
+        flex-grow: 1;
+        a {
+          color: $text-ui;
+          position: relative;
+          text-align: center;
+          font-size: 1.2em;
+          padding: 10px;
+          margin: 0;
+          height: 100%;
+          display: block;
+          -moz-transition: all .5s;
+          -webkit-transition: all .5s;
+          transition: all .5s;
+          overflow: hidden;
+          &:hover {
+            color: $text-hover;
+          }
+          &.selected {
+            color: $text-hover;
+          }
         }
       }
     }
@@ -143,34 +133,6 @@ a:hover {
   opacity: 0;
 }
 
-/************************
- SORT BUTTONS
-*************************/
-
-// #my-sort-buttons {
-//   @extend %my-flex;
-//   background-color: $nav-icons;
-//   text-align: center;
-//   justify-content: space-around;
-//   align-items: center;
-//   li {
-//     padding: 10px;
-//     flex-grow: 1;
-//     cursor: pointer;
-//     &:hover .glyphicon {
-//       color: $text-hover;
-//     }
-//     &.selected .glyphicon {
-//       color: $text-hover;
-//     }
-//   }
-//   .glyphicon {
-//     color: $text-ui;
-//     font-size: 1.4em;
-//     transition: color .3s ease;
-//   }
-// }
-
 /*=======================
  STREAMS
 =======================*/
@@ -179,17 +141,26 @@ a:hover {
   @extend %my-flex;
   background-color: $bg-list;
   flex-wrap: wrap;
-  // margin-top: 3px;
   padding-top: 3px;
   .stream {
     background-color: $stream-card;
     color: $text-hover;
-    box-sizing: border-box;
     position: relative;
     width: 32.33%;
     margin: 0.5%;
-    img {
-      width: 100%;
+    .image {
+      position: relative;
+      img {
+        width: 100%;
+      }
+      .invalid {
+        position: absolute;
+        background-color: rgba(0, 0, 0, .6);
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+      }
     }
     &-description {
       bottom: 0;
@@ -208,42 +179,6 @@ a:hover {
   }
 }
 
-.stream-list.list {
-  flex-wrap: nowrap;
-  flex-direction: column;
-  margin-top: 0;
-  .stream {
-    @extend %my-flex;
-    background-color: $stream-table;
-    width: 100%;
-    height: 80px;
-    border-bottom: 1px solid $divider-color;
-    margin: 0;
-    justify-content: space-around;
-    align-items: center;
-    img {
-      width: 60px;
-      height: 60px;
-      border: 1px solid $divider-color;
-      border-radius: 50%;
-      margin: 0 2rem 0 1rem;
-    }
-    &-description {
-      @extend %my-flex;
-      color: $text-text;
-      position: relative;
-      justify-content: space-between;
-      align-items: center;
-      h4 {
-        margin: 0;
-      }
-      p {
-        margin: 0 1rem;
-      }
-    }
-  }
-}
-
 .offline {
   color: $text-offline;
   font-weight: bold;
@@ -254,103 +189,33 @@ a:hover {
 /************************
  MEDIA QUERIES
 *************************/
+
 @media (min-width: 600px) {
-  // LIST
   .stream-list .stream {
     width: 24%;
   }
 }
 
-@media (max-width: 768px) {
-  // NAV
-  .my-navbar {
-    &-menu.fixed {
-      position:fixed;
-      top: 0;
-      width: 100%;
-      max-width: 1000px;
-      z-index: 999;
-    }
-    a {
-      min-width: 70px;
-    }
-  }
-  // SORT BUTTONS
-  // #my-sort-buttons {
-  //   position: fixed;
-  //   margin-bottom: 0;
-  //   left: 0px;
-  //   bottom: 0px;
-  //   width: 100%;
-  //   z-index: 899;
-  // }
-  // lIST
-  .stream {
-    h4 {
-      font-size: 1.7rem;
-    }
-  }
-  // FOOtER
-  .footer {
-    margin-top: 45px;
-  }
-}
-
 @media (min-width: 769px) {
-  // GLOBAL
-  body {
-    // margin-top: 87px;
-  }
-  // MAIN
   .wrapper {
     width: 70%;
     max-width: 1000px;
     margin: 0 auto;
   }
-  // NAV
-  .my-navbar {
-    // flex-direction: row;
-    // justify-content: space-between;
-    //== fixed navbar
-    // position: fixed;
-    // top: 0;
-    // width: inherit;
-    // max-width: 1000px;
-    // z-index: 999;
-    //== end of fixed navbar
+  .nav {
     &-header {
-      flex-grow: 1;
       h1 {
         margin: 0;
         padding: 8px 20px;
-        // background-color: darken(#FFCCBC, 20%);
-        // text-align: left;
       }
     }
-    a {
-      padding: 10px 20px 9px;
-    }
   }
-  // SORT BUTTONS
-  // #my-sort-buttons {
-  //   margin-bottom: 0;
-  //   position: fixed;
-  //   width: inherit;
-  //   max-width: 1000px;
-  //   top: 42px;
-  //   z-index: 999;
-  // }
-  // LIST
   .stream-list {
     margin-top: 3px;
   }
 }
 
 @media (min-width: 1000px) {
-  // LIST
-  .stream-list {
-    margin-top: 3px;
-  }
   .stream-list .stream {
     width: 19%;
   }

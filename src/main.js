@@ -11,12 +11,12 @@ class Main extends React.Component {
     super(props);
     this.state = {
       streams: [],
-      streamsOriginal: [],
+      // streamsOriginal: [],
       selectionType: 'A-Z',
       layoutType: 'table'
     };
     this.sortStreams = this.sortStreams.bind(this);
-    this.changeLayout = this.changeLayout.bind(this);
+    // this.changeLayout = this.changeLayout.bind(this);
   }
 
   customForEach(items, fn) {
@@ -28,49 +28,58 @@ class Main extends React.Component {
     }
   }
 
-  sortStreams(event, label) {
-    let updStreams = this.state.streams;
+  sortStreams(label) {
 /////////////////////////////////////////////////////////////////////
     // console.log(event);
-    let mouseX = event.clientX - (event.target.offsetLeft + document.getElementById('test').offsetLeft),
-        mouseY = event.clientY - (event.target.offsetTop + document.getElementById('test').offsetTop),
-        newElement = document.createElement('span');
+    // let mouseX = event.clientX - (event.target.offsetLeft + document.getElementById('test').offsetLeft),
+    //     mouseY = event.clientY - (event.target.offsetTop + document.getElementById('test').offsetTop),
+    //     newElement = document.createElement('span');
 
     // Remove any old elements
-    if (document.querySelector('.new-element')) {
-      document.querySelector('.new-element').remove();
-    }
-
-    newElement.classList.add('new-element');
-    newElement.style.top = (mouseY) + 'px';
-    newElement.style.left = (mouseX) + 'px';
-    document.getElementsByClassName('navbar-link')[0].appendChild(newElement);
-    window.setTimeout(() => {
-      document.getElementsByClassName('new-element')[0].classList.add('expanded');
-    }, 300, () => {
-      document.getElementsByClassName('navbar-link')[0].removeChild(document.getElementsByClassName('expanded')[0]);
-    });
+    // if (document.querySelector('.new-element')) {
+    //   document.querySelector('.new-element').remove();
+    // }
+    //
+    // newElement.classList.add('new-element');
+    // newElement.style.top = (mouseY) + 'px';
+    // newElement.style.left = (mouseX) + 'px';
+    // document.getElementsByClassName('nav-link')[0].appendChild(newElement);
+    // window.setTimeout(() => {
+    //   document.getElementsByClassName('new-element')[0].classList.add('expanded');
+    // }, 300, () => {
+    //   document.getElementsByClassName('nav-link')[0].removeChild(document.getElementsByClassName('expanded')[0]);
+    // });
 
 /////////////////////////////////////////////////////////////////////
-    updStreams = this.state.streamsOriginal.filter(stream => {
-      switch(label) {
-        case 'A-Z':
-          this.setState({selectionType: 'A-Z'});
-          return stream.streamStatus === 'Z-A';
-          break;
-        case 'Z-A':
-          this.setState({selectionType: 'Z-A'});
-          return stream.streamStatus !== 'Z-A';
-          break;
+    let sortOrder = label === 'A-Z' ? 1 : -1,
+        sortedStreams = this.state.streams,
+        onlineStreams = [],
+        offlineStreams = [],
+        finalStreams = [];
+
+    this.setState({selectionType: label})
+
+    sortedStreams.sort(function(a, b) {
+      if (a.streamName.toLowerCase() > b.streamName.toLowerCase()) {
+        return sortOrder * 1;
+      } else if (a.streamName.toLowerCase() < b.streamName.toLowerCase()) {
+        return sortOrder * -1;
+      } else {
+        return 0;
       }
     });
 
-    this.setState({streams: updStreams});
-  }
+    for (let i = 0, len = sortedStreams.length; i < len; i++) {
+      if (sortedStreams[i].streamStatus === "online") {
+        onlineStreams.push(sortedStreams[i]);
+      } else {
+        offlineStreams.push(sortedStreams[i]);
+      };
+    }
 
-  changeLayout(event, layoutType) {
-    event.preventDefault();
-    this.setState({layoutType});
+    finalStreams = onlineStreams.concat(offlineStreams);
+
+    this.setState({streams: finalStreams});
   }
 
   componentWillMount() {
@@ -97,10 +106,9 @@ class Main extends React.Component {
           streams.push(data);
           itemsProcessed++;
           if (itemsProcessed === channels.length) {
-            this.setState({streamsOriginal: streams, streams});
+            this.setState({streams});
+            this.sortStreams('A-Z');
           }
-
-          // console.log(data);
         });
       });
     });
@@ -119,29 +127,16 @@ class Main extends React.Component {
       logo = stream.logo === null || stream.logo === undefined ? dummyLogo : stream.logo;
 
     $(window).on('scroll', function(e) {
-      // console.log($(this).scrollTop());
       if ($(this).scrollTop() > 26) {
-        if (!$('.my-navbar-menu').hasClass('fixed')) {
-          // console.log('add class');
-          $('.my-navbar-menu').addClass('fixed');
+        if (!$('.nav-menu').hasClass('fixed')) {
+          $('.nav-menu').addClass('fixed');
         }
       } else {
-        if ($('.my-navbar-menu').hasClass('fixed')) {
-          // console.log('remove class');
-          $('.my-navbar-menu').removeClass('fixed');
+        if ($('.nav-menu').hasClass('fixed')) {
+          $('.nav-menu').removeClass('fixed');
         }
       }
     });
-
-    window.addEventListener('scroll', function() {
-      // console.log(document.getElementsByClassName('my-navbar-menu');
-      // console.log(document.getElementsByTagName('body').scrollTop());
-      if (document.getElementById('my-sort-buttons').scrollTop > 100) {
-        document.getElementById('my-sort-buttons').classList.add('fixed');
-      } else {
-        document.getElementById('my-sort-buttons').classList.remove('fixed');
-      }
-    })
 
       return <Stream key={key}
                     logo={logo}
@@ -154,13 +149,15 @@ class Main extends React.Component {
     });
 
     return (
-      <div className="wrapper">
+      <div>
         <NavBar sortStreams={this.sortStreams} selectionType={this.state.selectionType} />
         {/*<SortButtons layoutType={this.state.layoutType} changeLayout={this.changeLayout} />*/}
-        <div className={this.state.layoutType === "table" ? "stream-list" : "stream-list list"}>
-          {streams}
-        </div>
-        <div className="footer"></div>
+        <div className="wrapper">
+          <div className={this.state.layoutType === "table" ? "stream-list" : "stream-list list"}>
+            {streams}
+          </div>
+          {/*<div className="footer"></div>*/}
+        </div>]
       </div>
     );
   }
