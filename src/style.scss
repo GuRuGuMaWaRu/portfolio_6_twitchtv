@@ -12,6 +12,7 @@ $text-text    : $white;
 $text-ui      : darken($white, 60%);
 $text-hover   : $white;
 $text-offline : lighten(red, 20%);
+$text-footer  : darken($white, 40%);
 
 // $nav-header   : #E64A19;
 $nav-header   : $black;
@@ -19,8 +20,9 @@ $nav-header   : $black;
 $nav-buttons  : $black;
 // $nav-icons    : #FF5722;
 $nav-icons    : $black;
-$bg-body      : lighten(#000, 20%);
-$bg-list      : lighten(#000, 20%);
+$bg-body      : lighten($black, 20%);
+$bg-list      : lighten($black, 20%);
+$bg-footer    : lighten($black, 10%);
 
 // $stream-card  : rgba(0, 0, 0, 0.7);
 $stream-card  : $black;
@@ -202,6 +204,22 @@ a:hover {
   font-weight: bold;
   text-transform: uppercase;
   text-align: center;
+}
+
+/************************
+ FOOTER
+*************************/
+
+.footer {
+  background-color: $bg-footer;
+  color: $text-footer;
+  height: 50px;
+  width: 100%;
+  text-align: center;
+  p {
+    margin: 0;
+    line-height: 50px;
+  }
 }
 
 /************************

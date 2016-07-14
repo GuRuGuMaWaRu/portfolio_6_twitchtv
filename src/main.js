@@ -29,7 +29,7 @@ class Main extends React.Component {
   }
 
   sortStreams(label) {
-/////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // console.log(event);
     // let mouseX = event.clientX - (event.target.offsetLeft + document.getElementById('test').offsetLeft),
     //     mouseY = event.clientY - (event.target.offsetTop + document.getElementById('test').offsetTop),
@@ -50,15 +50,17 @@ class Main extends React.Component {
     //   document.getElementsByClassName('nav-link')[0].removeChild(document.getElementsByClassName('expanded')[0]);
     // });
 
-/////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // 1 - setup
     let sortOrder = label === 'A-Z' ? 1 : -1,
         sortedStreams = this.state.streams,
         onlineStreams = [],
         offlineStreams = [],
         finalStreams = [];
-
+    // 2 - button selection: 'A-Z' or 'Z-A'
     this.setState({selectionType: label})
-
+    // 3 - sort streams from A to Z or from Z to A
     sortedStreams.sort(function(a, b) {
       if (a.streamName.toLowerCase() > b.streamName.toLowerCase()) {
         return sortOrder * 1;
@@ -68,7 +70,7 @@ class Main extends React.Component {
         return 0;
       }
     });
-
+    // 4 - put active streams in one array, and inactive in another
     for (let i = 0, len = sortedStreams.length; i < len; i++) {
       if (sortedStreams[i].streamStatus === "online") {
         onlineStreams.push(sortedStreams[i]);
@@ -76,9 +78,9 @@ class Main extends React.Component {
         offlineStreams.push(sortedStreams[i]);
       };
     }
-
+    // 5 - merge array of active streams with array of inactive streams
     finalStreams = onlineStreams.concat(offlineStreams);
-
+    // 6 - save sorted streams
     this.setState({streams: finalStreams});
   }
 
@@ -156,8 +158,12 @@ class Main extends React.Component {
           <div className={this.state.layoutType === "table" ? "stream-list" : "stream-list list"}>
             {streams}
           </div>
-          {/*<div className="footer"></div>*/}
         </div>]
+        <div className="footer">
+          <div className="wrapper">
+            <p>Created by <a href="https://github.com/GuRuGuMaWaRu" target="_blank">GuRuGuMaWaRu</a>, 2016</p>
+          </div>
+        </div>
       </div>
     );
   }
