@@ -143,9 +143,9 @@ a:hover {
       .invalid {
         position: absolute;
         background-color: rgba(0, 0, 0, .6);
-        height: 100%;
+        height: calc(100% + 1px);
         width: 100%;
-        bottom: 0;
+        top: 0;
         left: 0;
       }
     }
