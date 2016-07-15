@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'whatwg-fetch';
 import './style.scss';
 import NavBar from './components/nav/NavBar';
 import Stream from './components/streams/Stream';
-import SortButtons from './components/elements/SortButtons';
 
 class Main extends React.Component {
   constructor(props) {
@@ -169,9 +167,9 @@ class Main extends React.Component {
     });
 
     return (
-      <div>
+      <div id="main-page">
         <NavBar clickButton={this.clickButton} selectionType={this.state.selectionType} />
-        <div className="wrapper">
+        <div id="content" className="wrapper">
           <div className="stream-list">
             {streams}
           </div>
