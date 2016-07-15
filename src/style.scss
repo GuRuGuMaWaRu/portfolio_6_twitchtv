@@ -2,40 +2,29 @@
  GENERAL
 *************************/
 
-$white        : #fff;
-$black        : #000;
-$black        : lighten(#000, 10%);
+$lighter-black  : lighten(#000, 10%);
 
+$text-primary   : #fff;
+$text-secondary : darken(#fff, 40%);
+$text-offline   : lighten(red, 20%);
 
-// $text-text    : #212121;
-$text-text    : $white;
-$text-ui      : darken($white, 60%);
-$text-hover   : $white;
-$text-offline : lighten(red, 20%);
-$text-footer  : darken($white, 40%);
-
-// $nav-header   : #E64A19;
-$nav-header   : $black;
-// $nav-buttons  : darken(#FFCCBC, 20%);
-$nav-buttons  : $black;
-// $nav-icons    : #FF5722;
-$nav-icons    : $black;
-$bg-body      : lighten($black, 20%);
-$bg-list      : lighten($black, 20%);
-$bg-footer    : lighten($black, 10%);
-
-// $stream-card  : rgba(0, 0, 0, 0.7);
-$stream-card  : $black;
-$stream-table : #f0f0f0;
-
-$divider-color: rgba(0,0,0, 0.14);
+$bg-primary     : $lighter-black;
+$bg-secondary   : lighten($lighter-black, 20%);
+$bg-footer      : lighten($lighter-black, 10%);
 
 
 body {
-  background-color: $bg-body;
+  background-color: $bg-secondary;
+  color: $text-primary;
   font-family: 'Bungee', cursive;
   font-family: 'Muli', sans-serif;
-  margin: 0;
+}
+
+h1,
+h4,
+p,
+a {
+  text-align: center;
 }
 
 ul {
@@ -50,107 +39,87 @@ li {
 a,
 a:link,
 a:hover {
+  color: $text-primary;
   text-decoration: none;
 }
 
 %my-flex {
-  display: flex;
   display: -webkit-flex;
+  display: flex;
 }
 
 /************************
  NAVBAR
 *************************/
 
+.nav,
+.nav-menu {
+  background-color: $bg-primary;
+}
+
 .nav {
   @extend %my-flex;
+  -webkit-flex-direction: column;
   flex-direction: column;
   position: relative;
-  // width: 100%;
-  // max-width: 1000px;
-  &-header {
-    background-color: $nav-header;
-    h1 {
-      margin: 0;
-      font-size: 1.7em;
-      // background-color: $nav-header;
-      color: $text-text;
-      text-align: center;
-      // align-self: center;
-    }
+  h1 {
+    margin: 0;
+    font-size: 1.7em;
   }
-  &-menu {
-    background-color: $nav-header;
-    &.fixed {
-      position:fixed;
-      top: 0;
-      width: 100%;
-      // max-width: 1000px;
-      z-index: 999;
-    }
-    &-buttons {
-      @extend %my-flex;
-      background-color: $nav-buttons;
-      position: relative;
-      align-items: center;
-      .selection-bar {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 50%;
-        height: 10%;
-        background-color: orange;
-        opacity: 0.7;
-        transition: all .4s ease;
-        &.left {
-          transform: translateX(0);
-        }
-        &.right {
-          transform: translateX(100%);
-        }
+  &-menu.fixed {
+    position:fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+  }
+  &-menu-buttons {
+    @extend %my-flex;
+    position: relative;
+    -webkit-align-items: center;
+    align-items: center;
+    .selection-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50%;
+      height: 10%;
+      background-color: orange;
+      opacity: 0.7;
+      -moz-transition: transform .4s ease;
+      -webkit-transition: transform .4s ease;
+      transition: transform .4s ease;
+      &.left {
+        -moz-transform: translateX(0);
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
       }
-      &-item {
-        flex-grow: 1;
-        a {
-          color: $text-ui;
-          position: relative;
-          text-align: center;
-          font-size: 1.2em;
-          padding: 10px;
-          // border-bottom: 5px solid orange;
-          margin: 0;
-          height: 100%;
-          display: block;
-          -moz-transition: all .5s;
-          -webkit-transition: all .5s;
-          transition: all .5s;
-          overflow: hidden;
-          &:hover {
-            color: $text-hover;
-          }
-          &.selected {
-            color: $text-hover;
-          }
+      &.right {
+        -moz-transform: translateX(100%);
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+      }
+    }
+    &-item {
+      -webkit-flex-grow: 1;
+      flex-grow: 1;
+      a {
+        color: $text-secondary;
+        position: relative;
+        display: block;
+        font-size: 1.2em;
+        padding: 10px;
+        margin: 0;
+        -moz-transition: color .5s;
+        -webkit-transition: color .5s;
+        transition: color .5s;
+        overflow: hidden;
+        &:hover,
+        &.selected {
+          color: $text-primary;
         }
       }
     }
   }
-}
-
-.new-element {
-  background-color: rgba(255,255,255,0.4);
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  border-radius: 50%;
-  opacity: 1;
-  transition: all .3s ease-out;
-  transform-origin: center;
-}
-
-.new-element.expanded {
-  transform: scale(100,100);
-  opacity: 0;
 }
 
 /*=======================
@@ -159,12 +128,11 @@ a:hover {
 
 .stream-list {
   @extend %my-flex;
-  background-color: $bg-list;
+  -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
   padding-top: 3px;
   .stream {
-    background-color: $stream-card;
-    color: $text-hover;
+    background-color: $bg-primary;
     position: relative;
     width: 32.33%;
     margin: 0.5%;
@@ -182,19 +150,13 @@ a:hover {
         left: 0;
       }
     }
-    &-description {
-      bottom: 0;
-      width: 100%;
-      h4 {
-        text-align: center;
-        font-weight: bold;
-        font-size: .8em;
-      }
-      p {
-        text-align: center;
-        margin: 1rem;
-        font-size: .7em;
-      }
+    h4 {
+      font-weight: bold;
+      font-size: .8em;
+    }
+    p {
+      margin: 1rem;
+      font-size: .7em;
     }
   }
 }
@@ -203,7 +165,6 @@ a:hover {
   color: $text-offline;
   font-weight: bold;
   text-transform: uppercase;
-  text-align: center;
 }
 
 /************************
@@ -212,10 +173,9 @@ a:hover {
 
 .footer {
   background-color: $bg-footer;
-  color: $text-footer;
+  color: $text-secondary;
   height: 50px;
   width: 100%;
-  text-align: center;
   p {
     margin: 0;
     line-height: 50px;
@@ -231,16 +191,20 @@ a:hover {
   height: 0;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.2);
+  -moz-transform: scale(0);
+  -webkit-transform: scale(0);
   transform: scale(0);
   position: absolute;
   opacity: 1;
 }
 .rippleEffect {
-    animation: rippleDrop .3s linear;
+  animation: rippleDrop .3s linear;
 }
 
 @keyframes rippleDrop {
   100% {
+    -moz-transform: scale(2);
+    -webkit-transform: scale(2);
     transform: scale(2);
     opacity: 0;
   }
@@ -250,33 +214,26 @@ a:hover {
  MEDIA QUERIES
 *************************/
 
-@media (min-width: 600px) {
+@media (min-width: 650px) {
   .stream-list .stream {
     width: 24%;
   }
 }
 
-@media (min-width: 769px) {
-  .wrapper {
-    width: 70%;
-    max-width: 1000px;
-    margin: 0 auto;
+@media (min-width: 800px) {
+  h1 {
+    margin: 0;
+    padding: 8px 20px;
   }
-  .nav {
-    &-header {
-      h1 {
-        margin: 0;
-        padding: 8px 20px;
-      }
-    }
-  }
-  .stream-list {
-    margin-top: 3px;
+  .stream-list .stream {
+    width: 19%;
   }
 }
 
-@media (min-width: 1000px) {
-  .stream-list .stream {
-    width: 19%;
+@media (min-width: 950px) {
+  .wrapper {
+    width: 80%;
+    max-width: 1000px;
+    margin: 0 auto;
   }
 }

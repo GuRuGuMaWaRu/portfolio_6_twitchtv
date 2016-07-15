@@ -11,8 +11,7 @@ class Main extends React.Component {
     super(props);
     this.state = {
       streams: [],
-      selectionType: 'A-Z',
-      layoutType: 'table'
+      selectionType: 'A-Z'
     };
     this.sortStreams = this.sortStreams.bind(this);
     this.clickButton = this.clickButton.bind(this);
@@ -34,7 +33,7 @@ class Main extends React.Component {
         onlineStreams = [],
         offlineStreams = [],
         finalStreams = [];
-    // 2 - button selection: 'A-Z' or 'Z-A'
+    // 2 - select button: 'A-Z' or 'Z-A'
     this.setState({selectionType: label})
     // 3 - sort streams from A to Z or from Z to A
     sortedStreams.sort(function(a, b) {
@@ -46,7 +45,7 @@ class Main extends React.Component {
         return 0;
       }
     });
-    // 4 - put active streams in one array, and inactive in another
+    // 4 - put active streams into one array, and inactive into another
     for (let i = 0, len = sortedStreams.length; i < len; i++) {
       if (sortedStreams[i].streamStatus === "online") {
         onlineStreams.push(sortedStreams[i]);
@@ -54,23 +53,13 @@ class Main extends React.Component {
         offlineStreams.push(sortedStreams[i]);
       };
     }
-    // 5 - merge array of active streams with array of inactive streams
+    // 5 - merge active streams array with inactive streams array
     finalStreams = onlineStreams.concat(offlineStreams);
     // 6 - save sorted streams
     this.setState({streams: finalStreams});
   }
 
   clickButton(event, label) {
-    // console.log('mouse click X:',event.pageX);
-    console.log('event.clientX:',event.clientX);
-    console.log('posX:',event.target.offsetLeft);
-    console.log('posXMain:',document.getElementById('nav-menu-buttons').offsetLeft);
-    // console.log('mouse click Y:',event.pageY);
-    console.log('event.clientY:',event.clientY);
-    console.log('posY:',event.target.offsetTop);
-    console.log('posYMain:',document.getElementById('nav-menu-buttons').offsetTop);
-
-
     event.preventDefault();
     // 1 - setup
     let posX = event.target.offsetLeft,
@@ -92,13 +81,9 @@ class Main extends React.Component {
        buttonWidth = buttonHeight;
      }
      // 5 - get the center of the element
-    //  var x = event.pageX - posX - buttonWidth / 2;
-    //  var y = event.pageY - posY - buttonHeight / 2;
     var x = event.clientX - (posX + posXMain) - buttonHeight / 2;
-    console.log('LEFT:', event.clientX - (posX + posXMain) - buttonHeight / 2);
     var y = event.clientY - posYMain - buttonHeight / 2;
-    console.log('TOP:', event.clientY - posYMain - buttonHeight / 2);
-     // 6 - add the ripples CSS and start the animation
+     // 6 - add ripples CSS and start animation
      $(".ripple").css({
        width: buttonWidth,
        height: buttonHeight,
@@ -110,14 +95,16 @@ class Main extends React.Component {
   }
 
   componentWillMount() {
+    // 1 - setup
     let channels = ["freecodecamp", "storbeck", "terakilobyte", "habathcx","RobotCaleb",
           "thomasballinger","noobs2ninjas","beohoff","brunofin","comster404","test_channel",
           "cretetion","sheevergaming","TR7K","OgamingSC2","ESL_SC2"],
         itemsProcessed = 0,
         streams = [];
-
+    // 2 - use Twitch API to download stream data
     this.customForEach(channels, channel => {
       let streamStatus = '';
+      // 2.1 - get stream status
       $.getJSON('https://api.twitch.tv/kraken/streams/' + channel + '?callback=?', data => {
         if (data.stream === null) {
           streamStatus = 'offline';
@@ -127,13 +114,18 @@ class Main extends React.Component {
           streamStatus = 'online';
         }
       }).done(() => {
+        // 2.2 - get stream data
         $.getJSON('https://api.twitch.tv/kraken/channels/' + channel + '?callback=?', data => {
+          // 2.3 - add previously received status data and known stream name to the data object
           data.streamStatus = streamStatus;
           data.streamName = channel;
+          // 2.4 - add stream data to a temporary stream array
           streams.push(data);
+          // 2.5 - use setState only after all stream data is received
           itemsProcessed++;
           if (itemsProcessed === channels.length) {
             this.setState({streams});
+            // 3 - sort streams and display them
             this.sortStreams('A-Z');
           }
         });
@@ -141,18 +133,8 @@ class Main extends React.Component {
     });
   }
 
-  render() {
-    let dummyLogo = "https://dummyimage.com/300/ecf0e7/5c5457.jpg&text=0x3F",
-        channels = ["freecodecamp", "storbeck", "terakilobyte", "habathcx","RobotCaleb",
-          "thomasballinger","noobs2ninjas","beohoff","brunofin","comster404","test_channel",
-          "cretetion","sheevergaming","TR7K","OgamingSC2","ESL_SC2"],
-        logo = "",
-        streams = [];
-
-
-    streams = this.state.streams.map((stream, key) => {
-      logo = stream.logo === null || stream.logo === undefined ? dummyLogo : stream.logo;
-
+  componentDidMount() {
+    // 1 - logic to fix/unfix navbar on scroll
     $(window).on('scroll', function(e) {
       if ($(this).scrollTop() > 26) {
         if (!$('.nav-menu').hasClass('fixed')) {
@@ -164,7 +146,18 @@ class Main extends React.Component {
         }
       }
     });
+  }
 
+  render() {
+    // 1 - setup
+    let dummyLogo = "https://dummyimage.com/300/ecf0e7/5c5457.jpg&text=0x3F",
+        logo = "",
+        streams = [];
+    // 2 - create an array of stream elements
+    streams = this.state.streams.map((stream, key) => {
+      // 2.1 - if there is no logo, replace it with a generic image
+      logo = stream.logo === null || stream.logo === undefined ? dummyLogo : stream.logo;
+      // 2.2 - create a stream element and push it into an array
       return <Stream key={key}
                     logo={logo}
                     name={stream.streamName}
@@ -178,12 +171,11 @@ class Main extends React.Component {
     return (
       <div>
         <NavBar clickButton={this.clickButton} selectionType={this.state.selectionType} />
-        {/*<SortButtons layoutType={this.state.layoutType} changeLayout={this.changeLayout} />*/}
         <div className="wrapper">
-          <div className={this.state.layoutType === "table" ? "stream-list" : "stream-list list"}>
+          <div className="stream-list">
             {streams}
           </div>
-        </div>]
+        </div>
         <div className="footer">
           <div className="wrapper">
             <p>Created by <a href="https://github.com/GuRuGuMaWaRu" target="_blank">GuRuGuMaWaRu</a>, 2016.</p>

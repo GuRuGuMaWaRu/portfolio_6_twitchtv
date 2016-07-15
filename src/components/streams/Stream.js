@@ -2,13 +2,12 @@ import React from 'react';
 
 export default class Stream extends React.Component {
   render() {
+    // 1 - setup
     let description = '',
         style = {
           backgroundImage: 'url(' + this.props.logo + ')'
         };
-
-    // console.log('rendering stream');
-
+    // 2 - show description for online streams or status for others
     if (this.props.status !== 'online') {
       description = this.props.status;
     } else {
@@ -21,7 +20,7 @@ export default class Stream extends React.Component {
           <img src={this.props.logo} style={style} />
           <div className={this.props.invalid ? "invalid" : ""}></div>
         </div>
-        <div className="stream-description">
+        <div>
           <h4>{this.props.name}</h4>
           <p className={this.props.invalid ? "offline" : ""}>{description}</p>
         </div>
