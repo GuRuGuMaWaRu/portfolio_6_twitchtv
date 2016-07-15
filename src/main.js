@@ -94,10 +94,10 @@ class Main extends React.Component {
      // 5 - get the center of the element
     //  var x = event.pageX - posX - buttonWidth / 2;
     //  var y = event.pageY - posY - buttonHeight / 2;
-    var x = event.clientX - (posX + posXMain);
-    console.log('LEFT:', event.clientX - (posX + posXMain));
-    var y = event.clientY - posYMain;
-    console.log('TOP:', event.clientY - posYMain);
+    var x = event.clientX - (posX + posXMain) - buttonHeight / 2;
+    console.log('LEFT:', event.clientX - (posX + posXMain) - buttonHeight / 2);
+    var y = event.clientY - posYMain - buttonHeight / 2;
+    console.log('TOP:', event.clientY - posYMain - buttonHeight / 2);
      // 6 - add the ripples CSS and start the animation
      $(".ripple").css({
        width: buttonWidth,
@@ -186,7 +186,7 @@ class Main extends React.Component {
         </div>]
         <div className="footer">
           <div className="wrapper">
-            <p>Created by <a href="https://github.com/GuRuGuMaWaRu" target="_blank">GuRuGuMaWaRu</a>, 2016</p>
+            <p>Created by <a href="https://github.com/GuRuGuMaWaRu" target="_blank">GuRuGuMaWaRu</a>, 2016.</p>
           </div>
         </div>
       </div>
