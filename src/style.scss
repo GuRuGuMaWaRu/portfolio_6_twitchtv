@@ -1,0 +1,264 @@
+/************************
+ GENERAL
+*************************/
+
+$lighter-black  : lighten(#000, 10%);
+
+$text-primary   : #fff;
+$text-secondary : darken(#fff, 40%);
+$text-offline   : lighten(red, 20%);
+
+$bg-primary     : $lighter-black;
+$bg-secondary   : lighten($lighter-black, 20%);
+$bg-footer      : lighten($lighter-black, 10%);
+
+body {
+  background-color: $bg-secondary;
+  color: $text-primary;
+  font-family: 'Bungee', cursive;
+  font-family: 'Muli', sans-serif;
+}
+
+h1,
+h4,
+p,
+a {
+  text-align: center;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a,
+a:link,
+a:hover {
+  color: $text-primary;
+  text-decoration: none;
+}
+
+%my-flex {
+  display: -webkit-flex;
+  display: flex;
+}
+
+/************************
+ NAVBAR
+*************************/
+
+.nav,
+.nav-menu {
+  background-color: $bg-primary;
+}
+
+.nav {
+  @extend %my-flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  position: relative;
+  h1 {
+    margin: 0;
+    font-size: 1.7em;
+  }
+  &-menu.fixed {
+    position:fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+  }
+  &-menu-buttons {
+    @extend %my-flex;
+    position: relative;
+    -webkit-align-items: center;
+    align-items: center;
+    .selection-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50%;
+      height: 10%;
+      background-color: orange;
+      opacity: 0.7;
+      -moz-transition: transform .4s ease;
+      -webkit-transition: transform .4s ease;
+      transition: transform .4s ease;
+      &.left {
+        -moz-transform: translateX(0);
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+      }
+      &.right {
+        -moz-transform: translateX(100%);
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+      }
+    }
+    &-item {
+      -webkit-flex-grow: 1;
+      flex-grow: 1;
+      a {
+        color: $text-secondary;
+        position: relative;
+        display: block;
+        font-size: 1.2em;
+        padding: 10px;
+        margin: 0;
+        -moz-transition: color .5s;
+        -webkit-transition: color .5s;
+        transition: color .5s;
+        overflow: hidden;
+        &:hover,
+        &.selected {
+          color: $text-primary;
+        }
+      }
+    }
+  }
+}
+
+/*=======================
+ STREAMS
+=======================*/
+
+.stream-list {
+  @extend %my-flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding-top: 3px;
+  .stream {
+    background-color: $bg-primary;
+    position: relative;
+    width: 32.33%;
+    margin: 0.5%;
+    .image {
+      position: relative;
+      img {
+        width: 100%;
+      }
+      .invalid {
+        position: absolute;
+        background-color: rgba(0, 0, 0, .6);
+        height: calc(100% + 1px);
+        width: 100%;
+        top: 0;
+        left: 0;
+      }
+    }
+    h4 {
+      font-weight: bold;
+      font-size: .8em;
+    }
+    p {
+      margin: 1rem;
+      font-size: .7em;
+    }
+  }
+}
+
+.offline {
+  color: $text-offline;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/************************
+ FOOTER
+*************************/
+
+.footer {
+  background-color: $bg-footer;
+  color: $text-secondary;
+  height: 50px;
+  width: 100%;
+  p {
+    margin: 0;
+    line-height: 50px;
+  }
+}
+
+/************************
+ FIXED FOOTER
+*************************/
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+#main {
+  position: relative;
+  min-height: 100%;
+}
+
+#content {
+  padding-bottom: 50px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+/************************
+ RIPPLE EFFECT
+*************************/
+
+.ripple {
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  -moz-transform: scale(0);
+  -webkit-transform: scale(0);
+  transform: scale(0);
+  position: absolute;
+  opacity: 1;
+}
+.rippleEffect {
+  animation: rippleDrop .4s linear;
+}
+
+@keyframes rippleDrop {
+  100% {
+    -moz-transform: scale(2);
+    -webkit-transform: scale(2);
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/************************
+ MEDIA QUERIES
+*************************/
+
+@media (min-width: 650px) {
+  .stream-list .stream {
+    width: 24%;
+  }
+}
+
+@media (min-width: 800px) {
+  h1 {
+    margin: 0;
+    padding: 8px 20px;
+  }
+  .stream-list .stream {
+    width: 19%;
+  }
+}
+
+@media (min-width: 950px) {
+  .wrapper {
+    width: 80%;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+}
