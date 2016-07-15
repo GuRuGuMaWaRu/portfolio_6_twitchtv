@@ -112,6 +112,7 @@ a:hover {
         -webkit-transition: color .5s;
         transition: color .5s;
         overflow: hidden;
+        outline: 0;
         &:hover,
         &.selected {
           color: $text-primary;
@@ -135,6 +136,9 @@ a:hover {
     position: relative;
     width: 32.33%;
     margin: 0.5%;
+    /* fix firefox bug with vertical percent-based margin for flex-items */
+    margin-top: 5px;
+    margin-bottom: 5px;
     .image {
       position: relative;
       img {

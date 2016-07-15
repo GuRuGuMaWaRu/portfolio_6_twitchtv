@@ -15,7 +15,7 @@ export default class Stream extends React.Component {
     }
 
     return (
-      <a className="stream" href={this.props.link} target="_blank">
+      <a className="stream" href={this.props.link ? this.props.link "#"} target="_blank">
         <div className="image">
           <img src={this.props.logo} style={style} />
           <div className={this.props.invalid ? "invalid" : ""}></div>
